@@ -49,3 +49,29 @@ Config::get('key', 'default value');
 =================CONTROLER==============
  1) tham khảo tài liệu laravel  key serch : controller
  https://laravel.com/docs/5.8/controllers#main-content
+
+ 2) gọi file view trong  action trong controller cú pháp :
+  public function index(){
+        return view('slider.index');
+    } 
+
+ 3 )    nhận tham số trên url truyền vào ở controller , function action
+ nhận vào tham số  ví dụ :
+ public function form($id){
+    truyền tham số ra file view sau file view truyền vào mảng ['ten bien'=> giá trị]
+        return view($this->pathViewController.'form',['id' =>$id ]);
+    }
+4)  tạo nhanh controller dùng câu lệnh :
+php artisan make:controller tên-controller --invokable
+
+5) cách lấy các tham số truyền từ url vào ở controller , dùng biến request
+ ví dụ 
+ public function changeStatus(Request $request)
+    {
+      //cach 1 
+
+     $id = $request->id;
+     //cach 2 
+     $id = $request->route('id');
+        return 'slider-controller-delete';
+    }

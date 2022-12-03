@@ -30,18 +30,18 @@ Route::group(['prefix' => $prefixAdmin], function() {
         // Matches The "/admin/users" URL
         return "/admin/users";
     });
-    Route::get('category', function () {
-        // Matches The "/admin/category" URL
-        return "/admin/category";
-    });
+
+     // ===============slider==============
     $prefix = 'slider';
     Route::group(['prefix' => $prefix], function() use($prefix) {
         $controller = ucfirst( $prefix).'Controller@';
         Route::get('/', $controller.'index');
         Route::get('add', $controller.'form');
-        Route::get('edit', $controller.'form');
-        Route::get('delete', $controller.'delete');
+        Route::get('edit/{id}', $controller.'form');
+        Route::get('delete/{id}', $controller.'delete');
+        Route::get('change-status/{id}/{status}', $controller.'changeStatus');
     });
+   
     
     
 });
