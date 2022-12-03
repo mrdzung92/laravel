@@ -25,24 +25,33 @@ Route::get('/about', function () {
     return 'about';
 });
 
-Route::group(['prefix' => $prefixAdmin], function() {
+Route::group(['prefix' => $prefixAdmin], function () {
     Route::get('users', function () {
         // Matches The "/admin/users" URL
         return "/admin/users";
     });
 
-     // ===============slider==============
-    $prefix = 'slider';
-    Route::group(['prefix' => $prefix], function() use($prefix) {
-        $controller = ucfirst( $prefix).'Controller@';
-        Route::get('/', $controller.'index');
-        Route::get('add', $controller.'form');
-        Route::get('edit/{id}', $controller.'form');
-        Route::get('delete/{id}', $controller.'delete');
-        Route::get('change-status/{id}/{status}', $controller.'changeStatus');
-    });
-   
-    
-    
-});
+    // ===============slider==============
+    $prefix         = 'slider';
+    $controllerName = 'slider';
+    Route::group(['prefix' => $prefix], function () use ($controllerName) {
 
+        $controller = ucfirst($controllerName) . 'Controller@';
+        Route::get('/', [
+            'as' => $controllerName,
+            'uses' => $controller . 'index'
+        ]);
+        Route::get('form/{id?}', [
+            'as' => $controllerName . '/form',
+            'uses' => $controller . 'form'
+        ]);
+        Route::get('delete/{id}', [
+            'as' => $controllerName . '/delete',
+            'uses' => $controller . 'delete'
+        ]);
+        Route::get('change-status/{id}/{status}', [
+            'as' => $controllerName . '/change-status',
+            'uses' => $controller . 'changeStatus'
+        ]);
+    });
+});

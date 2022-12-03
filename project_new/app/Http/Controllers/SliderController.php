@@ -9,11 +9,18 @@ use Illuminate\Http\Request;
 class SliderController extends Controller
 {
     private $pathViewController = 'admin.slider.';
+    private $controllerName = 'slider';
+
+    public function __construct()
+    {  
+        view()->share('controllerName', $this-> controllerName);  
+    }
+    
     public function index()
     {
         return view($this->pathViewController . 'index');
     }
-    public function form($id)
+    public function form($id=null)
     {
         $title = 'slider- controller -form';
         return view($this->pathViewController . 'form', [
@@ -31,7 +38,7 @@ class SliderController extends Controller
         echo '<pre>';
         print_r($request->id);
         echo '</pre>';
-        return 'slider-controller-delete';
+        return redirect()->route('slider');
     }
 
 }

@@ -8,8 +8,9 @@
 </head>
 <body>
     
-    <h1 style="color: crimson">category-controller - action form</h1>
+    <h1 style="color: crimson">slider-controller - action form</h1>
     <h3 style="color: crimson">id : <?= $id ?> </h3>
     <h3 style="color: crimson">title : <?= $title ?> </h3>
+    <h3 style="color: crimson">title : <?= $controllerName ?> </h3>
 </body>
 </html>
