@@ -1,0 +1,51 @@
+===========laravel  5.8 =================
+=1 )cài đặt project  gõ lệnh: composer create-project --prefer-dist laravel/laravel blog "5.8.*"    
+=2) chạy dự án laravel mở dự án dùng câu lệnh : php artisan serve
+
+================= router ===========
+=1) khai báo tham số trên url để biến vào trong dấu ngoặc {} ví dụ
+Route::get('/category/{id}', function ($id) {
+    return 'about';
+});
+
+=2) truyền tham số có điều kiện  dùng where ví dụ
+Route::get('user/{id}', function ($id) {
+    //
+})->where('id', '[0-9]+');
+
+=3 ) khi url có chung 1 tiền tố ví dụ  admin thì dùng route group 
+ cú pháp :
+ Route::prefix('admin')->group(function () {
+    Route::get('users', function () {
+        // Matches The "/admin/users" URL
+    });
+    Route::get('category', function () {
+        // Matches The "/admin/category" URL
+    });
+    Route::get('slider', function () {
+        // Matches The "/admin/slider" URL
+    });
+});
+
+hoặc cú pháp :
+Route::group(['prefix' => 'admin'], function() {
+    Route::get('users', function () {
+        // Matches The "/admin/users" URL
+        return "/admin/users";
+    });
+    Route::get('category', function () {
+        // Matches The "/admin/category" URL
+        return "/admin/category";
+    });
+    Route::get('slider', function () {
+        // Matches The "/admin/slider" URL
+        return "/admin/slider";
+    });
+});
+
+=4 )  gọi hằng số từ trong phần config dùng cú pháp :
+Config::get('key', 'default value');
+
+=================CONTROLER==============
+ 1) tham khảo tài liệu laravel  key serch : controller
+ https://laravel.com/docs/5.8/controllers#main-content
