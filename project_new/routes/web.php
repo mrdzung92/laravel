@@ -31,6 +31,19 @@ Route::group(['prefix' => $prefixAdmin], function () {
         return "/admin/users";
     });
 
+    // ===============dashboard==============
+    $prefix         = 'dashboard';
+    $controllerName = 'dashboard';
+    Route::group(['prefix' => $prefix], function () use ($controllerName) {
+
+        $controller = ucfirst($controllerName) . 'Controller@';
+        Route::get('/', [
+            'as' => $controllerName,
+            'uses' => $controller . 'index'
+        ]);
+    });
+
+
     // ===============slider==============
     $prefix         = 'slider';
     $controllerName = 'slider';
