@@ -75,3 +75,8 @@ php artisan make:controller tên-controller --invokable
      $id = $request->route('id');
         return 'slider-controller-delete';
     }
+
+
+    =================database==============
+    1) cài đặt model cho database  sử dụng câu lệnh :
+    php artisan make:model tên tập tin model

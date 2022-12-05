@@ -5,22 +5,29 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\models\SliderModel as MainModel;
 
 class SliderController extends Controller
 {
     private $pathViewController = 'admin.slider.';
     private $controllerName = 'slider';
+    private $model ;
 
     public function __construct()
-    {  
-        view()->share('controllerName', $this-> controllerName);  
+    {
+        $this->model = new MainModel();
+        view()->share('controllerName', $this->controllerName);
     }
-    
+
     public function index()
     {
-        return view($this->pathViewController . 'index');
+       
+        $items = $this->model->listItem(null, ['task' => 'admin-list-item']);
+        return view($this->pathViewController . 'index', [
+            'items' => $items
+        ]);
     }
-    public function form($id=null)
+    public function form($id = null)
     {
         $title = 'slider- controller -form';
         return view($this->pathViewController . 'form', [
@@ -40,5 +47,4 @@ class SliderController extends Controller
         echo '</pre>';
         return redirect()->route('slider');
     }
-
 }
