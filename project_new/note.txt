@@ -80,3 +80,6 @@ php artisan make:controller tên-controller --invokable
     =================database==============
     1) cài đặt model cho database  sử dụng câu lệnh :
     php artisan make:model tên tập tin model
+
+    2) cài đặt laravel debugbar để check câu query sử dụng câu lệnh:
+    composer require barryvdh/laravel-debugbar --dev

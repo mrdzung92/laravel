@@ -74,7 +74,7 @@
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
-                @include('admin.slider.list')
+                @include('admin.pages.slider.list')
             </div>
         </div>
     </div>

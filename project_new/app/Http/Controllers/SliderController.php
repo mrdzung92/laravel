@@ -9,7 +9,7 @@ use App\models\SliderModel as MainModel;
 
 class SliderController extends Controller
 {
-    private $pathViewController = 'admin.slider.';
+    private $pathViewController = 'admin.pages.slider.';
     private $controllerName = 'slider';
     private $model ;
 
@@ -20,12 +20,12 @@ class SliderController extends Controller
     }
 
     public function index()
-    {
-       
+    {   
         $items = $this->model->listItem(null, ['task' => 'admin-list-item']);
         return view($this->pathViewController . 'index', [
             'items' => $items
         ]);
+       
     }
     public function form($id = null)
     {
