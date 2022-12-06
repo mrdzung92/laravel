@@ -31,31 +31,31 @@ class Template
     }
 
 
-    public static function showButtonAction($controllerName ,$id)
+    public static function showButtonAction($controllerName, $id)
     {
         $tmpButton = [
-            'edit' => [ 'class' => 'btn-success','title'=>'Edit','icon'=>'fa-pencil','route-name'=>$controllerName . '/form'],
-            'delete' => [ 'class' => 'btn-danger','title'=>'Delete','icon'=>'fa-trash','route-name'=>$controllerName . '/delete'],
-            'info' => [ 'class' => 'btn-info','title'=>'View','icon'=>'fa-trash','route-name'=>$controllerName . '/delete']
+            'edit' => ['class' => 'btn-success', 'title' => 'Edit', 'icon' => 'fa-pencil', 'route-name' => $controllerName . '/form'],
+            'delete' => ['class' => 'btn-danger', 'title' => 'Delete', 'icon' => 'fa-trash', 'route-name' => $controllerName . '/delete'],
+            'info' => ['class' => 'btn-info', 'title' => 'View', 'icon' => 'fa-trash', 'route-name' => $controllerName . '/delete']
         ];
         $btnInArea = [
-            'default'=>['edit','delete'],
-            'slider' =>['edit','delete']
+            'default' => ['edit', 'delete'],
+            'slider' => ['edit', 'delete']
         ];
 
-        $controllerName = (array_key_exists($controllerName,$btnInArea))?$controllerName:'default';
-        $listButton  =$btnInArea[$controllerName];
-        $xhtml =' <div class="zvn-box-btn-filter">';
-          foreach($listButton as $btn){
-              $currentBtn = $tmpButton[$btn];
-              $link = route($currentBtn['route-name'],['id'=>$id]);
-            $xhtml.=sprintf('<a href="%s" type="button"
+        $controllerName = (array_key_exists($controllerName, $btnInArea)) ? $controllerName : 'default';
+        $listButton  = $btnInArea[$controllerName];
+        $xhtml = ' <div class="zvn-box-btn-filter">';
+        foreach ($listButton as $btn) {
+            $currentBtn = $tmpButton[$btn];
+            $link = route($currentBtn['route-name'], ['id' => $id]);
+            $xhtml .= sprintf('<a href="%s" type="button"
                      class="btn btn-icon %s" data-toggle="tooltip" data-placement="top"
                     data-original-title="%s">
                     <i class="fa %s"></i>
-                 </a>',$link,$currentBtn['class'],$currentBtn['title'],$currentBtn['icon']);
-          };
-        $xhtml .='</div>';
+                 </a>', $link, $currentBtn['class'], $currentBtn['title'], $currentBtn['icon']);
+        };
+        $xhtml .= '</div>';
 
         return $xhtml;
     }
