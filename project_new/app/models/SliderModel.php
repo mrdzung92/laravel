@@ -3,12 +3,13 @@
 namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
+use DB;
 
 class SliderModel extends Model
 {
     // chọn bảng thao tác là slider
     protected $table = 'slider';
-    
+
     // chọn khóa chính là cột id
     // protected $primaryKey = 'id';
 
@@ -21,16 +22,34 @@ class SliderModel extends Model
     const CREATED_AT = 'created';
     const UPDATED_AT = 'modified';
 
-    public function listItem($params,$option){
-        $result =null;
-        if($option['task']=='admin-list-item'){
+    public function listItem($params, $option)
+    {
+
+        $result = null;
+        if ($option['task'] == 'admin-list-item') {
+
             // $result = SliderModel::all('id','name','link');
-            $result = self::select('id','name','description','link','thumb','created','created_by','modified','modified_by','status')
-            ->orderBy('id','desc')
-            ->paginate($params['pagination']['totalItemsPerPage']);
-            // ->get();
+            $query = $this->select('id', 'name', 'description', 'link', 'thumb', 'created', 'created_by', 'modified', 'modified_by', 'status');
+
+            if ($params['filter']['status'] !== 'all') {
+                $query->where('status', $params['filter']['status']);
+            }
+            $result =  $query->orderBy('id', 'desc')
+                ->paginate($params['pagination']['totalItemsPerPage']);
         }
-       return $result;
+        return $result;
     }
-   
+
+
+    public function countItems($params = null, $option = null)
+    {
+        $result = null;
+        if ($option['task'] == 'admin-count-item-group-by-status') {
+            $result = self::select(DB::raw('count(id) as count,status'))
+                ->groupBy('status')
+                ->get()
+                ->toArray();
+        }
+        return $result;
+    }
 }

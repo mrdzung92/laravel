@@ -1,4 +1,8 @@
 @extends('admin.main')
+@php
+    use App\helper\template as template ;
+    $xhtmlBtnFilter = template::showBtnFilter($controllerName,$itemsStatusCount,$params['filter']['status'])
+@endphp
 @section('content')
     <div class="page-header zvn-page-header clearfix">
         <div class="zvn-page-header-title">
@@ -14,13 +18,9 @@
                 @include('admin.templates.x_title',['title'=>'Bộ lọc'])
                 <div class="x_content">
                     <div class="row">
-                        <div class="col-md-6"><a href="?filter_status=all" type="button" class="btn btn-primary">
-                                All <span class="badge bg-white">4</span>
-                            </a><a href="?filter_status=active" type="button" class="btn btn-success">
-                                Active <span class="badge bg-white">2</span>
-                            </a><a href="?filter_status=inactive" type="button" class="btn btn-success">
-                                Inactive <span class="badge bg-white">2</span>
-                            </a>
+                        <div class="col-md-6">
+                            {!!$xhtmlBtnFilter!!}
+                           
                         </div>
                         <div class="col-md-6">
                             <div class="input-group">
@@ -51,13 +51,7 @@
                                 <input type="hidden" name="search_field" value="all">
                             </div>
                         </div>
-                        <div class="col-md-2">
-                            <select name="select_filter" class="form-control" data-field="level">
-                                <option value="default" selected="selected">Select Level</option>
-                                <option value="admin">Admin</option>
-                                <option value="member">Member</option>
-                            </select>
-                        </div>
+                
                     </div>
                 </div>
             </div>

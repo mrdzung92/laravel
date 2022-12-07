@@ -15,14 +15,14 @@ class Template
 
     public static function showItemStatus($controlerName, $status, $id)
     {
-        $tmpStatus = [
-            'active' => ['name' => 'Active', 'class' => 'btn-success'],
-            'inactive' => ['name' => 'Inctive', 'class' => 'btn-danger']
-        ];
-        $currentStatus = $tmpStatus[$status];
+        $tmpStatus = Config::get('zendvn.template.status');
+
+        $statusValue = array_key_exists($status, $tmpStatus) ? $status : 'default';
+  
+        $currentTemplateStatus = $tmpStatus[$statusValue];
         $link  = route($controlerName . '/change-status', ['id' => $id, 'status' => $status]);
         return sprintf('<a href="%s" type="button"
-        class="btn btn-round %s">%s</a>', $link, $currentStatus['class'], $currentStatus['name']);
+        class="btn btn-round %s">%s</a>', $link, $currentTemplateStatus['class'], $currentTemplateStatus['name']);
     }
 
     public static function showItemThumb($controlerName, $thumbName, $thumbAlt)
@@ -57,6 +57,38 @@ class Template
         };
         $xhtml .= '</div>';
 
+        return $xhtml;
+    }
+
+
+    public static function showBtnFilter($controllerName,$itemsStatusCount,$currentFilterStatus)
+    {
+        $xhtml = null;
+        $tmpStatus = Config::get('zendvn.template.status');
+        if (count($itemsStatusCount) > 0) {
+
+            $all['count'] = array_sum(array_column($itemsStatusCount, 'count'));
+            $all['status'] = 'all';
+            array_unshift($itemsStatusCount, $all);
+            foreach ($itemsStatusCount as $item) {
+                $statusValue = $item['status'];
+                $statusValue = array_key_exists($statusValue, $tmpStatus) ? $statusValue : 'default';
+                $currentTemplateStatus = $tmpStatus[$statusValue];
+                $link = route($controllerName).'?filter_status='.$statusValue;
+                $class = ($currentFilterStatus ==$statusValue)?'btn-success':'btn-primary';
+
+                $xhtml .= sprintf('<a href="%s" type="button" class="btn %s">
+                %s <span class="badge bg-white">%s</span>
+            </a>',$link, $class, $currentTemplateStatus['name'], $item['count']);
+            }
+        }
+
+
+        // <a href="?filter_status=active" type="button" class="btn btn-success">
+        //     Active <span class="badge bg-white">2</span>
+        // </a><a href="?filter_status=inactive" type="button" class="btn btn-success">
+        //     Inactive <span class="badge bg-white">2</span>
+        // </a>
         return $xhtml;
     }
 }
