@@ -76,6 +76,8 @@ $(document).ready(function() {
 		window.location.href = pathname + "?" + link.slice(0,-1) + 'select_field='+ select_field + '&select_value=' + select_value;
  	});
 
+
+
 	// Change attributes with selectbox
 	// $selectChangeAttr.on('change', function() {
 	// 	let item_id = $(this).data('id');

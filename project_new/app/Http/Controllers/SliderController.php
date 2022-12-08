@@ -43,9 +43,12 @@ class SliderController extends Controller
             'title' => $title
         ]);
     }
-    public function delete()
+    public function delete(Request $request)
     {
-        return 'slider-controller-delete';
+        $params['id'] =$request->id;
+        $this->model->deleteItem($params,['task'=>'delete-item']);
+  
+        return redirect()->route($this-> controllerName)->with('status', 'Xoá phần tử thành công');
     }
 
     public function changeStatus(Request $request)

@@ -83,13 +83,20 @@ class SliderModel extends Model
     {
         
         if ($option['task'] == 'change-status') {
-            echo '<pre>';
-            print_r($params);
-            echo '</pre>';
             $status = ($params['currentStatus']=='active')?'inactive':'active';
             self::where('id', $params['id'])
             ->update(['status' => $status]);
           
+        }
+        
+    }
+
+
+    public function deleteItem($params = null, $option = null)
+    {       
+        if ($option['task'] == 'delete-item') {
+           self::where('id', $params['id'])
+            ->delete();         
         }
         
     }
