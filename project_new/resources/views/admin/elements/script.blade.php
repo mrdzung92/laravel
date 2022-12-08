@@ -12,3 +12,4 @@
 <script src="{{asset('backend/asset/iCheck/icheck.min.js')}}"></script>
 <!-- Custom Theme Scripts -->
 <script src="{{asset('backend/js/custom.min.js')}}"></script>
+<script src="{{asset('backend/js/my-js.js')}}"></script>

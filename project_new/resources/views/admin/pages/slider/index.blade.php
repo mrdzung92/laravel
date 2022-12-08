@@ -1,7 +1,8 @@
 @extends('admin.main')
 @php
     use App\helper\template as template ;
-    $xhtmlBtnFilter = template::showBtnFilter($controllerName,$itemsStatusCount,$params['filter']['status'])
+    $xhtmlBtnFilter = template::showBtnFilter($controllerName,$itemsStatusCount,$params['filter']['status'],$params['search']);
+    $xhtmlAreaSearch = template::showAreaSearch($controllerName,$params['search']);
 @endphp
 @section('content')
     <div class="page-header zvn-page-header clearfix">
@@ -18,39 +19,8 @@
                 @include('admin.templates.x_title',['title'=>'Bộ lọc'])
                 <div class="x_content">
                     <div class="row">
-                        <div class="col-md-6">
-                            {!!$xhtmlBtnFilter!!}
-                           
-                        </div>
-                        <div class="col-md-6">
-                            <div class="input-group">
-                                <div class="input-group-btn">
-                                    <button type="button" class="btn btn-default dropdown-toggle btn-active-field"
-                                        data-toggle="dropdown" aria-expanded="false">
-                                        Search by All <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                                        <li><a href="#" class="select-field" data-field="all">Search by All</a></li>
-                                        <li><a href="#" class="select-field" data-field="id">Search by ID</a></li>
-                                        <li><a href="#" class="select-field" data-field="username">Search by
-                                                Username</a>
-                                        </li>
-                                        <li><a href="#" class="select-field" data-field="fullname">Search by
-                                                Fullname</a>
-                                        </li>
-                                        <li><a href="#" class="select-field" data-field="email">Search by Email</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <input type="text" class="form-control" name="search_value" value="">
-                                <span class="input-group-btn">
-                                    <button id="btn-clear" type="button" class="btn btn-success"
-                                        style="margin-right: 0px">Xóa tìm kiếm</button>
-                                    <button id="btn-search" type="button" class="btn btn-primary">Tìm kiếm</button>
-                                </span>
-                                <input type="hidden" name="search_field" value="all">
-                            </div>
-                        </div>
+                        <div class="col-md-7">{!!$xhtmlBtnFilter!!}</div>
+                        <div class="col-md-5">{!!$xhtmlAreaSearch!!}</div>
                 
                     </div>
                 </div>

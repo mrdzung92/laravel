@@ -14,10 +14,7 @@
         </div>
         
         <div class="col-md-6">
-            {{$items->links('pagination.pagination_backend',['paginator'=>$items])}}
-            
-
-
+            {{$items->appends(request()->input())->links('pagination.pagination_backend',['paginator'=>$items])}}
         </div>
     </div>
 </div>

@@ -1,5 +1,6 @@
 @php
     use App\helper\Template as Template;
+    use App\helper\HighLight as HighLight;
 @endphp
 <div class="x_content">
     <div class="table-responsive">
@@ -21,9 +22,9 @@
                         @php
                             $index = $key + 1;
                             $class = $index % 2 == 0 ? 'even' : 'odd';
-                            $name = $value['name'];
-                            $description = $value['description'];
-                            $link = $value['link'];
+                            $name = HighLight::show($value['name'],$params['search'],'name');
+                            $description = HighLight::show($value['description'],$params['search'],'description');
+                            $link = HighLight::show($value['link'],$params['search'],'link');
                             $image = Template::showItemThumb($controllerName,$value['thumb'],$value['name']);
                             $status = Template::showItemStatus($controllerName, $value['status'], $value['id']);
                             $createdHistory = Template::showItemHistory($value['created_by'], $value['created']);
@@ -33,9 +34,9 @@
                         <tr class="{{$class}} pointer">
                             <td class="">{{ $index }}</td>
                             <td width="40%">
-                                <p><strong>Name: </strong>{{ $name }}</p>
-                                <p><strong>Description: </strong>{{ $description }}</p>
-                                <p><strong>Link: </strong> {{ $link }}</p>
+                                <p><strong>Name: </strong>{!! $name !!}</p>
+                                <p><strong>Description: </strong>{!! $description !!}</p>
+                                <p><strong>Link: </strong> {!! $link !!}</p>
                                 <p> {!! $image !!}</p>
                             </td>
 

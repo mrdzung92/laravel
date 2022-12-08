@@ -34,8 +34,11 @@ $(document).ready(function() {
 
 		let search_field = $inputSearchField.val();
 		let search_value = $inputSearchValue.val();
-
-		window.location.href = pathname + "?" + link + 'search_field='+ search_field + '&search_value=' + search_value.replace(/\s+/g, '+').toLowerCase();
+		if(search_value.replace('/\s/g',"")==''){
+			alert('nhap vao gia tri can tim')
+		}else{
+			window.location.href = pathname + "?" + link + 'search_field='+ search_field + '&search_value=' + search_value.replace(/\s+/g, '+').toLowerCase();
+		}
 	});
 
 	$btnClearSearch.click(function() {
@@ -134,9 +137,9 @@ $(document).ready(function() {
 	});
 
 	//Init datepicker
-	$('.datepicker').datepicker({
-		format: 'dd-mm-yyyy',
-	});
+	// $('.datepicker').datepicker({
+	// 	format: 'dd-mm-yyyy',
+	// });
 
 
 	//Confirm button delete item
