@@ -17,7 +17,7 @@ class SliderController extends Controller
     public function __construct()
     {   
         $this->model = new MainModel();
-        $this->params['pagination']['totalItemsPerPage'] = 1;
+        $this->params['pagination']['totalItemsPerPage'] = 3;
         view()->share('controllerName', $this->controllerName);
     }
 
@@ -50,9 +50,10 @@ class SliderController extends Controller
 
     public function changeStatus(Request $request)
     {
-        echo '<pre>';
-        print_r($request->id);
-        echo '</pre>';
-        return redirect()->route('slider');
+        $params['currentStatus'] =$request->status;
+        $params['id'] =$request->id;
+        $this->model->saveItem($params,['task'=>'change-status']);
+  
+        return redirect()->route($this-> controllerName)->with('status', 'Cập nhật trạng thái thành công');
     }
 }
