@@ -35,13 +35,25 @@ class SliderController extends Controller
         ]);
        
     }
-    public function form($id = null)
+    public function form(Request $request)
     {
-        $title = 'slider- controller -form';
-        return view($this->pathViewController . 'form', [
-            'id' => $id,
-            'title' => $title
-        ]);
+        $items = null;
+        if($request->id !==null){
+            $params['id'] =$request->id;
+            $items = $this->model->getItems( $params, ['task'=>'get-item']);
+        }
+        echo '<pre>';
+        print_r($items);
+        echo '</pre>';
+
+        return view($this->pathViewController . 'form',['items'=>$items]);
+    }
+
+    public function save(Request $request)
+    {
+        echo '<h3>save</h3>';
+    
+       
     }
     public function delete(Request $request)
     {

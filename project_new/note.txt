@@ -83,3 +83,8 @@ php artisan make:controller tên-controller --invokable
 
     2) cài đặt laravel debugbar để check câu query sử dụng câu lệnh:
     composer require barryvdh/laravel-debugbar --dev
+
+
+     =================form==============
+          1 )cài đặt laravel  colective dùng câu lệnh : composer require laravelcollective/html:^5.8
+

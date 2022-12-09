@@ -100,4 +100,14 @@ class SliderModel extends Model
         }
         
     }
+
+    public function getItems($params = null, $option = null)
+    {       
+        $result =null;
+        if ($option['task'] == 'get-item') {
+            $result = self::select('id', 'name', 'description', 'link', 'thumb','status')
+            ->where('id',$params['id'])->first()->toArray();         
+        }
+        return $result;
+    }
 }

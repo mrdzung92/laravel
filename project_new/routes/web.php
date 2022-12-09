@@ -66,5 +66,9 @@ Route::group(['prefix' => $prefixAdmin], function () {
             'as' => $controllerName . '/change-status',
             'uses' => $controller . 'changeStatus'
         ]);
+        Route::post('save', [
+            'as' => $controllerName . '/save',
+            'uses' => $controller . 'save'
+        ]);
     });
 });

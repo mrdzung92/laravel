@@ -8,10 +8,14 @@ return [
         'short_time' => 'd/m/Y'
     ],
     'template' => [
+        'form'=>[
+            'label_class'=>  'control-label col-md-3 col-sm-3 col-xs-12',
+            'input_class'=> "form-control col-md-6 col-xs-12"
+        ],
         'status' => [
             'all' => ['name' => 'All', 'class' => 'btn-success'],
             'active' => ['name' => 'Active', 'class' => 'btn-success'],
-            'inactive' => ['name' => 'Inctive', 'class' => 'btn-danger'],
+            'inactive' => ['name' => 'Inactive', 'class' => 'btn-danger'],
             'block' => ['name' => 'block', 'class' => 'btn-info'],
             'default' => ['name' => 'undifined', 'class' => 'btn-danger']
         ],
