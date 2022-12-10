@@ -87,4 +87,6 @@ php artisan make:controller tên-controller --invokable
 
      =================form==============
           1 )cài đặt laravel  colective dùng câu lệnh : composer require laravelcollective/html:^5.8
+          2) validate : https://laravel.com/docs/9.x/validation#main-content
+          3) tạo form request : php artisan make:request Ten request
 

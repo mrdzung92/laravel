@@ -27,7 +27,7 @@ class Template
 
     public static function showItemThumb($controlerName, $thumbName, $thumbAlt)
     {
-        return sprintf('<img src="%s" alt="%s" class="zvn-thumb">', asset("image/$controlerName/$thumbName"), $thumbAlt);
+        return sprintf('<img src="%s" alt="%s" class="zvn-thumb">', asset("images/$controlerName/$thumbName"), $thumbAlt);
     }
 
 

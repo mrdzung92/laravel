@@ -3,12 +3,15 @@
 namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 use DB;
 
 class SliderModel extends Model
 {
     // chọn bảng thao tác là slider
     protected $table = 'slider';
+    protected $folderUpload = 'slider';
 
     // chọn khóa chính là cột id
     // protected $primaryKey = 'id';
@@ -23,6 +26,10 @@ class SliderModel extends Model
     const UPDATED_AT = 'modified';
     protected $fieldSearchAccept = [
         'id',  'name', 'description', 'link'
+    ];
+    // những field không được thêm vào database
+    protected $crudNotAccept = [
+        '_token',  'thumb_current'
     ];
     public function listItem($params, $option)
     {
@@ -81,11 +88,27 @@ class SliderModel extends Model
 
     public function saveItem($params = null, $option = null)
     {
+       
         
         if ($option['task'] == 'change-status') {
             $status = ($params['currentStatus']=='active')?'inactive':'active';
             self::where('id', $params['id'])
             ->update(['status' => $status]);
+          
+        }
+
+        if ($option['task'] == 'add-item') {
+            $params['created'] = date('Y-m-d H:i:s',time());
+            $params['created_by'] = 'admin';
+            $thumb = $params['thumb'];
+            $params['thumb'] = Str::random(10).'.'.$thumb->clientExtension();
+            $thumb -> storeAs($this->folderUpload,$params['thumb'],'my_strorage_image');
+            $params = array_diff_key($params,array_flip($this->crudNotAccept));
+            self::insert($params);
+        }
+
+        if ($option['task'] == 'edit-item') {
+            
           
         }
         
@@ -95,7 +118,9 @@ class SliderModel extends Model
     public function deleteItem($params = null, $option = null)
     {       
         if ($option['task'] == 'delete-item') {
-           self::where('id', $params['id'])
+            $item = self::getItems($params,['task'=>'get-thumb']);
+            Storage::disk('my_strorage_image')->delete("$this->folderUpload/".$item['thumb']);
+            self::where('id', $params['id'])
             ->delete();         
         }
         
@@ -108,6 +133,18 @@ class SliderModel extends Model
             $result = self::select('id', 'name', 'description', 'link', 'thumb','status')
             ->where('id',$params['id'])->first()->toArray();         
         }
+        if ($option['task'] == 'get-thumb') {
+            $result = self::select('id','thumb')->where('id',$params['id'])->first()->toArray();  
+                   
+        }
         return $result;
+    }
+
+    public function getDbCol($data)
+    {   
+       $result = $this->getConnection()->getSchemaBuilder()->getColumnListing($this->getTable()) ;
+        $arrColumn = array_flip(array_values($result));
+        $data = array_intersect_key($data, $arrColumn);
+        return  $data;
     }
 }

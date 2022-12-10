@@ -4,8 +4,8 @@
     use App\helper\Form as FormTemplate;
     
     $formClass = config('zendvn.template.form');
-    $inputHiddenId = Form::hidden("id", $items['id']??'');
-    $inputHiddenThumb = Form::hidden("thumb_current", $items['thumb']??'');
+    $inputHiddenId = Form::hidden('id', $items['id'] ?? '');
+    $inputHiddenThumb = Form::hidden('thumb_current', $items['thumb'] ?? '');
     $elements = [
         [
             'label' => Form::label('name', 'Name', ['class' => $formClass['label_class']]),
@@ -27,12 +27,12 @@
         [
             'label' => Form::label('thumb', 'Thumb', ['class' => $formClass['label_class']]),
             'element' => Form::file('thumb', ['class' => $formClass['input_class']]),
-            'thumb' => (!empty($items['id'])) ? Template::showItemThumb($controllerName, $items['thumb'], $items['name']) : null,
+            'thumb' => !empty($items['id']) ? Template::showItemThumb($controllerName, $items['thumb'], $items['name']) : null,
             'type' => 'thumb',
         ],
     
         [
-            'element' => $inputHiddenId.$inputHiddenThumb.Form::submit('Save', ['class' => 'btn btn-success']),
+            'element' => $inputHiddenId . $inputHiddenThumb . Form::submit('Save', ['class' => 'btn btn-success']),
             'type' => 'btn-submit',
         ],
     ];
@@ -40,13 +40,14 @@
 @endphp
 @section('content')
     @include('admin.templates.page_header', ['pageIndex' => false])
+    @include('admin.templates.validate_error', ['pageIndex' => false])
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
                 @include('admin.templates.x_title', ['title' => 'Form'])
                 <div class="x_content">
                     <div class="row">
-                       
+
                         {!! Form::open([
                             'method' => 'POST',
                             'url' => route("$controllerName/save"),

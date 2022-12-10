@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\models\SliderModel as MainModel;
+use App\Http\Requests\SliderRequest as MainRequest;
 
 class SliderController extends Controller
 {
@@ -42,15 +43,24 @@ class SliderController extends Controller
             $params['id'] =$request->id;
             $items = $this->model->getItems( $params, ['task'=>'get-item']);
         }
-        echo '<pre>';
-        print_r($items);
-        echo '</pre>';
-
         return view($this->pathViewController . 'form',['items'=>$items]);
     }
 
-    public function save(Request $request)
+    public function save(MainRequest $request)
     {
+        if(request()->method()=='POST'){
+            $params = request()->all();
+            $task = 'add-item';
+            $notify = 'Thêm phần tử thành công';
+            if($params['id']!==null){
+                $task = 'edit-item';
+                $notify = 'Cập nhật phần tử thành công';
+            }
+
+            $this->model->saveItem($params,['task'=> $task]);
+            return redirect()->route($this->controllerName)->with('status',$notify);
+        }
+        
         echo '<h3>save</h3>';
     
        
