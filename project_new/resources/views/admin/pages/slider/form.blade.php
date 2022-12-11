@@ -3,30 +3,30 @@
     use App\helper\template as Template;
     use App\helper\Form as FormTemplate;
     
-    $formClass = config('zendvn.template.form');
+    $formAtributes = config('zendvn.template.form');
     $inputHiddenId = Form::hidden('id', $items['id'] ?? '');
     $inputHiddenThumb = Form::hidden('thumb_current', $items['thumb'] ?? '');
     $elements = [
         [
-            'label' => Form::label('name', 'Name', ['class' => $formClass['label_class']]),
-            'element' => Form::text('name', $items['name'] ?? '', ['class' => $formClass['input_class']]),
+            'label' => Form::label('name', 'Name', ['class' => $formAtributes['label_atributes']]),
+            'element' => Form::text('name', $items['name'] ?? '', ['class' => $formAtributes['input_atributes']]),
         ],
     
         [
-            'label' => Form::label('description', 'Description', ['class' => $formClass['label_class']]),
-            'element' => Form::text('description', $items['description'] ?? '', ['class' => $formClass['input_class']]),
+            'label' => Form::label('description', 'Description', ['class' => $formAtributes['label_atributes']]),
+            'element' => Form::text('description', $items['description'] ?? '', ['class' => $formAtributes['input_atributes']]),
         ],
         [
-            'label' => Form::label('status', 'Status', ['class' => $formClass['label_class']]),
-            'element' => Form::select('status', ['active' => config('zendvn.template.status.active.name'), 'inactive' => config('zendvn.template.status.inactive.name')], $items['status'] ?? '', ['placeholder' => 'Select Status', 'class' => $formClass['input_class']]),
+            'label' => Form::label('status', 'Status', ['class' => $formAtributes['label_atributes']]),
+            'element' => Form::select('status', ['active' => config('zendvn.template.status.active.name'), 'inactive' => config('zendvn.template.status.inactive.name')], $items['status'] ?? '', ['placeholder' => 'Select Status', 'class' => $formAtributes['input_atributes']]),
         ],
         [
-            'label' => Form::label('link', 'Link', ['class' => $formClass['label_class']]),
-            'element' => Form::text('link', $items['link'] ?? '', ['class' => $formClass['input_class']]),
+            'label' => Form::label('link', 'Link', ['class' => $formAtributes['label_atributes']]),
+            'element' => Form::text('link', $items['link'] ?? '', ['class' => $formAtributes['input_atributes']]),
         ],
         [
-            'label' => Form::label('thumb', 'Thumb', ['class' => $formClass['label_class']]),
-            'element' => Form::file('thumb', ['class' => $formClass['input_class']]),
+            'label' => Form::label('thumb', 'Thumb', ['class' => $formAtributes['label_atributes']]),
+            'element' => Form::file('thumb', ['class' => $formAtributes['input_atributes']]),
             'thumb' => !empty($items['id']) ? Template::showItemThumb($controllerName, $items['thumb'], $items['name']) : null,
             'type' => 'thumb',
         ],

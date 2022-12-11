@@ -9,8 +9,8 @@ return [
     ],
     'template' => [
         'form'=>[
-            'label_class'=>  'control-label col-md-3 col-sm-3 col-xs-12',
-            'input_class'=> "form-control col-md-6 col-xs-12"
+            'label_atributes'=> ['class'=>'control-label col-md-3 col-sm-3 col-xs-12'] ,
+            'input_atributes'=> ['class'=>"form-control col-md-6 col-xs-12"]
         ],
         'status' => [
             'all' => ['name' => 'All', 'class' => 'btn-success'],
