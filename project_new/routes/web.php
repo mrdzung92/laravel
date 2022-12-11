@@ -15,16 +15,9 @@ use Illuminate\Routing\RouteGroup;
 
 // $prefixAdmin = config('zendvn.url.prefix_admin');
 $prefixAdmin = Config::get('zendvn.url.prefix_admin', 'admin69');
+$prefixNews = Config::get('zendvn.url.prefix_new', 'news');
 
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/about', function () {
-    return 'about';
-});
-
+ // ===============admin page==============
 Route::group(['prefix' => $prefixAdmin], function () {
     Route::get('users', function () {
         // Matches The "/admin/users" URL
@@ -72,3 +65,28 @@ Route::group(['prefix' => $prefixAdmin], function () {
         ]);
     });
 });
+
+ // ===============home page==============
+ Route::group(['prefix' =>  $prefixNews], function () {
+    Route::get('users', function () {
+        // Matches The "/admin/users" URL
+        return "/admin/users";
+    });
+
+    // ===============dashboard==============
+    $prefix         = '';
+    $controllerName = 'home';
+    Route::group(['prefix' =>$prefix], function () use ($controllerName) {
+
+        $controller = ucfirst($controllerName) . 'Controller@';
+        Route::get('/', [
+            'as' => $controllerName,
+            'uses' => $controller . 'index'
+        ]);
+    });
+
+
+   
+});
+ 
+

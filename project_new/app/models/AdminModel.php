@@ -30,14 +30,7 @@ class AdminModel extends Model
     protected $crudNotAccept = [
         '_token',  'thumb_current'
     ];
-   
 
-
-   
-
-
-   
-  
     public function getDbCol($data)
     {
         $result = $this->getConnection()->getSchemaBuilder()->getColumnListing($this->getTable());

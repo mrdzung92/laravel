@@ -1,7 +1,8 @@
 <?php
 return [
     'url' => [
-        'prefix_admin' => 'admin'
+        'prefix_admin' => 'admin',
+        'prefix_new' => 'news'
     ],
     'format' => [
         'long_time' => 'H:m:s d/m/Y',

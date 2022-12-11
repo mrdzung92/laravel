@@ -42,6 +42,12 @@ class SliderModel extends AdminModel
             $result =  $query->orderBy('id', 'desc')
                 ->paginate($params['pagination']['totalItemsPerPage']);
         }
+
+        if ($option['task'] == 'news-list-items') {
+           $query = $this->select('id','name','description','link','thumb')
+           ->where('status','=','active')->limit(5);
+           $result =$query->get()->toArray();
+        }
         return $result;
     }
 
