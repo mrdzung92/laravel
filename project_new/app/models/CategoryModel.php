@@ -48,6 +48,13 @@ class CategoryModel extends AdminModel
             ->where('status','=','active')->limit(8);
             $result =$query->get()->toArray();
          }
+
+         if ($option['task'] == 'news-list-items-is-home') {
+            $query = $this->select('id','name')
+            ->where('status','=','active')
+            ->where('is_home','=','1');
+            $result =$query->get()->toArray();
+         }
         return $result;
     }
 
