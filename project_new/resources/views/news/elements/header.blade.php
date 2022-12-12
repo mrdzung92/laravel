@@ -1,3 +1,18 @@
+@php
+use App\models\CategoryModel;
+$category = new CategoryModel();
+$itemsCategory = $category->listItem(null, ['task'=>'news-list-items']);
+$xhtmlMenu ='';
+$xhtmlMenumobile ='';
+if(count($itemsCategory)>0){
+    
+    foreach ($itemsCategory as  $menu){
+        $xhtmlMenu .= sprintf('<li><a href="index.html">%s</a></li>',$menu['name']);
+        $xhtmlMenumobile .= sprintf('  <li class="menu_mm"><a href="index.html">%s</a></li>',$menu['name']);
+    }
+  
+}
+@endphp
 <header class="header">
     <!-- Header Content -->
     <div class="header_content_container">
@@ -36,12 +51,7 @@
                         <!-- Navigation -->
                         <nav class="main_nav">
                             <ul class="main_nav_list d-flex flex-row align-items-center justify-content-start">
-                                <li><a href="index.html">home</a></li>
-                                <li><a href="#">tech</a></li>
-                                <li><a href="#">innovation</a></li>
-                                <li><a href="#">videos</a></li>
-                                <li><a href="#">world</a></li>
-                                <li><a href="contact.html">contact</a></li>
+                             {!!$xhtmlMenu!!}
                             </ul>
                         </nav>
                         <!-- Hamburger -->
@@ -53,3 +63,28 @@
         </div>
     </div>
 </header>
+<!-- Menu -->
+<div class="menu d-flex flex-column align-items-end justify-content-start text-right menu_mm trans_400">
+    <div class="menu_close_container">
+        <div class="menu_close">
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <nav class="menu_nav">
+        <ul class="menu_mm">
+            {!!$xhtmlMenumobile!!}
+        </ul>
+    </nav>
+    <div class="menu_subscribe"><a href="#">Subscribe</a></div>
+    <div class="menu_extra">
+        <div class="menu_social">
+            <ul>
+                <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -41,11 +41,13 @@ return [
     'config' => [
         'search' => [
             'slider' => ['all','id','name',  'description', 'link'],
-            'default' => ['fullname', 'name']
+            'default' => ['fullname', 'name'],
+            'category' => ['all','id','name'],
         ],
         'actionBtn' => [
             'default' => ['edit', 'delete'],
-            'slider' => ['edit', 'delete']
+            'slider' => ['edit', 'delete'],
+            'category' => ['edit', 'delete']
         ]
 
     ]

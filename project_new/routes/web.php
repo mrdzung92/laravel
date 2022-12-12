@@ -17,7 +17,7 @@ use Illuminate\Routing\RouteGroup;
 $prefixAdmin = Config::get('zendvn.url.prefix_admin', 'admin69');
 $prefixNews = Config::get('zendvn.url.prefix_new', 'news');
 
- // ===============admin page==============
+// ===============admin page==============
 Route::group(['prefix' => $prefixAdmin], function () {
     Route::get('users', function () {
         // Matches The "/admin/users" URL
@@ -64,10 +64,38 @@ Route::group(['prefix' => $prefixAdmin], function () {
             'uses' => $controller . 'save'
         ]);
     });
+
+    // ===============category==============
+    $prefix         = 'category';
+    $controllerName = 'category';
+    Route::group(['prefix' => $prefix], function () use ($controllerName) {
+
+        $controller = ucfirst($controllerName) . 'Controller@';
+        Route::get('/', [
+            'as' => $controllerName,
+            'uses' => $controller . 'index'
+        ]);
+        Route::get('form/{id?}', [
+            'as' => $controllerName . '/form',
+            'uses' => $controller . 'form'
+        ]);
+        Route::get('delete/{id}', [
+            'as' => $controllerName . '/delete',
+            'uses' => $controller . 'delete'
+        ]);
+        Route::get('change-status/{id}/{status}', [
+            'as' => $controllerName . '/change-status',
+            'uses' => $controller . 'changeStatus'
+        ]);
+        Route::post('save', [
+            'as' => $controllerName . '/save',
+            'uses' => $controller . 'save'
+        ]);
+    });
 });
 
- // ===============home page==============
- Route::group(['prefix' =>  $prefixNews], function () {
+// ===============home page==============
+Route::group(['prefix' =>  $prefixNews], function () {
     Route::get('users', function () {
         // Matches The "/admin/users" URL
         return "/admin/users";
@@ -76,7 +104,7 @@ Route::group(['prefix' => $prefixAdmin], function () {
     // ===============dashboard==============
     $prefix         = '';
     $controllerName = 'home';
-    Route::group(['prefix' =>$prefix], function () use ($controllerName) {
+    Route::group(['prefix' => $prefix], function () use ($controllerName) {
 
         $controller = ucfirst($controllerName) . 'Controller@';
         Route::get('/', [
@@ -84,9 +112,4 @@ Route::group(['prefix' => $prefixAdmin], function () {
             'uses' => $controller . 'index'
         ]);
     });
-
-
-   
 });
- 
-
