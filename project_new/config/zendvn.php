@@ -20,6 +20,12 @@ return [
             'block' => ['name' => 'block', 'class' => 'btn-info'],
             'default' => ['name' => 'undifined', 'class' => 'btn-danger']
         ],
+        'is_home' => [
+           
+            '1' => ['name' => 'Show', 'class' => 'btn-success'],
+            '0' => ['name' => 'Hide', 'class' => 'btn-danger'],         
+            'default' => ['name' => 'undifined', 'class' => 'btn-danger']
+        ],
         'search' => [
             'all' => ['name' => 'Search by All'],
             'id' => ['name' => 'Search by ID'],

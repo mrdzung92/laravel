@@ -21,7 +21,7 @@ class CategoryModel extends AdminModel
         $result = null;
         if ($option['task'] == 'admin-list-item') {
             // $result = SliderModel::all('id','name','link');
-            $query = $this->select('id', 'name', 'created', 'created_by', 'modified', 'modified_by', 'status');
+            $query = $this->select('id', 'name', 'is_home','created', 'created_by', 'modified', 'modified_by', 'status');
 
             if ($params['filter']['status'] !== 'all') {
                 $query->where('status', $params['filter']['status']);
@@ -42,7 +42,7 @@ class CategoryModel extends AdminModel
             $result =  $query->orderBy('id', 'desc')
                 ->paginate($params['pagination']['totalItemsPerPage']);
         }
-        
+
         if ($option['task'] == 'news-list-items') {
             $query = $this->select('id','name')
             ->where('status','=','active')->limit(8);
@@ -84,6 +84,12 @@ class CategoryModel extends AdminModel
             $status = ($params['currentStatus'] == 'active') ? 'inactive' : 'active';
             self::where('id', $params['id'])
                 ->update(['status' => $status]);
+        }
+
+        if ($option['task'] == 'change-is-home') {
+            $isHome = ($params['currentIsHome'] == '1') ? '0' : '1';
+            self::where('id', $params['id'])
+                ->update(['is_home' => $isHome]);
         }
 
         if ($option['task'] == 'add-item') {

@@ -87,6 +87,10 @@ Route::group(['prefix' => $prefixAdmin], function () {
             'as' => $controllerName . '/change-status',
             'uses' => $controller . 'changeStatus'
         ]);
+        Route::get('isHome/{id}/{is_home}', [
+            'as' => $controllerName . '/isHome',
+            'uses' => $controller . 'isHome'
+        ]);
         Route::post('save', [
             'as' => $controllerName . '/save',
             'uses' => $controller . 'save'

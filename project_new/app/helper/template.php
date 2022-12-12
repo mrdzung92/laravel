@@ -25,6 +25,18 @@ class Template
         class="btn btn-round %s">%s</a>', $link, $currentTemplateStatus['class'], $currentTemplateStatus['name']);
     }
 
+    public static function showItemIsHome($controlerName, $isHomeValue, $id)
+    {
+        $tmpIsHome = Config::get('zendvn.template.is_home');
+
+        $isHomeValue = array_key_exists($isHomeValue, $tmpIsHome) ? $isHomeValue : 'default';
+
+        $currentTemplateIsHome = $tmpIsHome[$isHomeValue];
+        $link  = route($controlerName . '/isHome', ['id' => $id, 'is_home' => $isHomeValue]);
+        return sprintf('<a href="%s" type="button"
+        class="btn btn-round %s">%s</a>', $link, $currentTemplateIsHome['class'], $currentTemplateIsHome['name']);
+    }
+
     public static function showItemThumb($controlerName, $thumbName, $thumbAlt)
     {
         return sprintf('<img src="%s" alt="%s" class="zvn-thumb">', asset("images/$controlerName/$thumbName"), $thumbAlt);
