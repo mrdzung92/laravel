@@ -26,6 +26,12 @@ return [
             '0' => ['name' => 'Hide', 'class' => 'btn-danger'],         
             'default' => ['name' => 'undifined', 'class' => 'btn-danger']
         ],
+        'display' => [
+            'default' => ['name' => 'undifined'],
+            'list' => ['name' => 'List'],
+            'grid' => ['name' => 'Grid'],         
+            
+        ],
         'search' => [
             'all' => ['name' => 'Search by All'],
             'id' => ['name' => 'Search by ID'],

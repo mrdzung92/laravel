@@ -21,7 +21,7 @@ class CategoryModel extends AdminModel
         $result = null;
         if ($option['task'] == 'admin-list-item') {
             // $result = SliderModel::all('id','name','link');
-            $query = $this->select('id', 'name', 'is_home','created', 'created_by', 'modified', 'modified_by', 'status');
+            $query = $this->select('id', 'name', 'is_home','display','created', 'created_by', 'modified', 'modified_by', 'status');
 
             if ($params['filter']['status'] !== 'all') {
                 $query->where('status', $params['filter']['status']);
@@ -50,7 +50,7 @@ class CategoryModel extends AdminModel
          }
 
          if ($option['task'] == 'news-list-items-is-home') {
-            $query = $this->select('id','name')
+            $query = $this->select('id','name','display')
             ->where('status','=','active')
             ->where('is_home','=','1');
             $result =$query->get()->toArray();
@@ -112,6 +112,14 @@ class CategoryModel extends AdminModel
             $params['modified'] = date('Y-m-d H:i:s', time());
             $params['modified_by'] = 'admin';
             self::where('id', $params['id'])->update($this->repairParams($params));
+        }
+
+        if ($option['task'] == 'change-display') {
+            $data =[];
+            $data ['modified'] =date('Y-m-d H:i:s', time());          
+            $data['modified_by'] = 'admin';
+            $data['display'] = $params['currentDisplay'];
+            self::where('id', $params['id'])->update( $data);
         }
     }
 

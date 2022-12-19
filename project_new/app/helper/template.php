@@ -93,6 +93,26 @@ class Template
         return $xhtml;
     }
 
+    public static function showItemSelect($controllerName, $displayValue, $id)
+    {
+        $tmpDisplay = Config::get('zendvn.template.display');
+        $link   = route($controllerName.'/display',['id'=>$id,'display_value'=>'value_new']);
+        $xhtml = sprintf('<select name="select_change_attr" data-url="%s" class="form-control">',$link);
+        if(array_key_exists($displayValue,$tmpDisplay)){
+            unset($tmpDisplay['default']);
+        }
+       foreach($tmpDisplay as $key=>$value){
+        $xhtmlSelected ='';
+        if($key == $displayValue){
+            $xhtmlSelected ='selected="selected"';            
+        } 
+        $xhtml.=sprintf('<option value = "%s" %s >%s</option>',$key,$xhtmlSelected,$value['name']);
+       }
+        
+        $xhtml .= '</select>';
+        return $xhtml;
+    }
+
 
     public static function showAreaSearch($controllerName,$paramSearch)
     {

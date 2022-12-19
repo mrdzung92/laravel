@@ -108,35 +108,39 @@ $(document).ready(function() {
 
 	$selectChangeAttr.on('change', function() {
 		let select_value = $(this).val();
-		let $url = $(this).data('url');
-		window.location.href = $url.replace('value_new', select_value);
+		let url = $(this).data('url');
+
+		url = url.replace('value_new', select_value);
+		
+
+		window.location.href = url;
 	});
 
-	$selectChangeAttrAjax.on('change', function() {
-		let select_value = $(this).val();
-		let $url = $(this).data('url');
-		let csrf_token = $("input[name=csrf-token]").val();
+	// $selectChangeAttrAjax.on('change', function() {
+	// 	let select_value = $(this).val();
+	// 	let $url = $(this).data('url');
+	// 	let csrf_token = $("input[name=csrf-token]").val();
 
-		$.ajax({
-			url : $url.replace('value_new', select_value),
-			type : "GET",
-			dataType: "json",
-			headers: {'X-CSRF-TOKEN': csrf_token},
-			success : function (result){
-				if(result) {
-					$.notify({
-						message: "Cập nhật giá trị thành công!"
-					}, {
-						delay: 500,
-						allow_dismiss: false
-					});
-				}else {
-					console.log(result)
-				}
-			}
-		});
+	// 	$.ajax({
+	// 		url : $url.replace('value_new', select_value),
+	// 		type : "GET",
+	// 		dataType: "json",
+	// 		headers: {'X-CSRF-TOKEN': csrf_token},
+	// 		success : function (result){
+	// 			if(result) {
+	// 				$.notify({
+	// 					message: "Cập nhật giá trị thành công!"
+	// 				}, {
+	// 					delay: 500,
+	// 					allow_dismiss: false
+	// 				});
+	// 			}else {
+	// 				console.log(result)
+	// 			}
+	// 		}
+	// 	});
 
-	});
+	// });
 
 	//Init datepicker
 	// $('.datepicker').datepicker({

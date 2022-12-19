@@ -18,7 +18,7 @@ class CategoryController extends Controller
     public function __construct()
     {   
         $this->model = new MainModel();
-        $this->params['pagination']['totalItemsPerPage'] = 3;
+        $this->params['pagination']['totalItemsPerPage'] = 10;
         view()->share('controllerName', $this->controllerName);
     }
 
@@ -89,5 +89,14 @@ class CategoryController extends Controller
         $this->model->saveItem($params,['task'=>'change-is-home']);
   
         return redirect()->route($this-> controllerName)->with('status', 'Cập nhật trạng thái thành công');
+    }
+
+    public function display(Request $request)
+    {
+        $params['currentDisplay'] =$request->display_value;
+        $params['id'] =$request->id;
+        $this->model->saveItem($params,['task'=>'change-display']);
+  
+        return redirect()->route($this-> controllerName)->with('status', 'Thay đổi kiểu hiện thị thành công');
     }
 }

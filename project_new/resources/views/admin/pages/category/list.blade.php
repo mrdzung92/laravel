@@ -10,7 +10,8 @@
                 <tr class="headings">
                     <th class="column-title"> # </th>
                     <th class="column-title">Name</th>
-                    <th class="column-title">Home</th>
+                    <th class="column-title">Kiểu hiện thị</th>
+                    <th class="column-title">Hiển thị ngoài trang chủ</th>
                     <th class="column-title">Trạng thái</th>
                     <th class="column-title">Tạo mới</th>
                     <th class="column-title">Chỉnh sửa</th>
@@ -25,6 +26,7 @@
                             $index = $key + 1;
                             $class = $index % 2 == 0 ? 'even' : 'odd';
                             $name = HighLight::show($value['name'],$params['search'],'name');
+                            $display = Template::showItemSelect($controllerName, $value['display'], $value['id']);
                             $status = Template::showItemStatus($controllerName, $value['status'], $value['id']);
                             $isHome = Template::showItemIsHome($controllerName, $value['is_home'], $value['id']);
                             $createdHistory = Template::showItemHistory($value['created_by'], $value['created']);
@@ -35,6 +37,9 @@
                             <td class="">{{ $index }}</td>
                             <td >
                                 {!! $name !!}
+                            </td>
+                            <td >
+                                {!! $display !!}
                             </td>
                             <td >
                                 {!!  $isHome !!}
