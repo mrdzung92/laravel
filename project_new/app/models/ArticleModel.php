@@ -123,7 +123,7 @@ class ArticleModel extends AdminModel
     {
         $result = null;
         if ($option['task'] == 'get-item') {
-            $result = self::select('id', 'name', 'content', 'thumb', 'status')
+            $result = self::select('id', 'name', 'content', 'thumb', 'status','category_id')
                 ->where('id', $params['id'])->first()->toArray();
         }
         if ($option['task'] == 'get-thumb') {

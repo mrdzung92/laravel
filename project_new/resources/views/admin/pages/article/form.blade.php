@@ -23,7 +23,7 @@
         ],
         [
             'label' => Form::label('category', 'Category', ['class' => $formAtributes['label_atributes']]),
-            'element' => Form::select('category', ['active' => config('zendvn.template.status.active.name'), 'inactive' => config('zendvn.template.status.inactive.name')], $items['status'] ?? '', ['placeholder' => 'Select Status', 'class' => $formAtributes['input_atributes']]),
+            'element' => Form::select('category', $itemsCategory, $items['category_id'] ?? '', ['placeholder' => 'Select Category', 'class' => $formAtributes['input_atributes']]),
         ],
         [
             'label' => Form::label('thumb', 'Thumb', ['class' => $formAtributes['label_atributes']]),

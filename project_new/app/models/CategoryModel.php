@@ -63,7 +63,7 @@ class CategoryModel extends AdminModel
             $query = $this->select('id', 'name')
                 ->orderBy('name','asc')
                 ->where('status','=','active');
-            $result = $query->get()->toArray();
+            $result = $query->pluck('name','id')->toArray();
         }
         return $result;
     }
