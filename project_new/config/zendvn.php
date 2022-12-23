@@ -11,7 +11,8 @@ return [
     'template' => [
         'form'=>[
             'label_atributes'=> ['class'=>'control-label col-md-3 col-sm-3 col-xs-12'] ,
-            'input_atributes'=> ['class'=>"form-control col-md-6 col-xs-12"]
+            'input_atributes'=> ['class'=>"form-control col-md-6 col-xs-12"],
+            'input_ckEditor'=> ['class'=>"form-control col-md-6 col-xs-12 ckeditor"]
         ],
         'status' => [
             'all' => ['name' => 'All', 'class' => 'btn-success'],
@@ -55,11 +56,13 @@ return [
             'slider' => ['all','id','name',  'description', 'link'],
             'default' => ['fullname', 'name'],
             'category' => ['all','id','name'],
+            'article' => ['all','name','content']
         ],
         'actionBtn' => [
             'default' => ['edit', 'delete'],
             'slider' => ['edit', 'delete'],
-            'category' => ['edit', 'delete']
+            'category' => ['edit', 'delete'],
+            'article' => ['edit', 'delete']
         ]
 
     ]

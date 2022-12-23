@@ -10,6 +10,7 @@
 <script src="{{asset('backend/asset/bootstrap-progressbar/bootstrap-progressbar.min.js')}}"></script>
 <!-- iCheck -->
 <script src="{{asset('backend/asset/iCheck/icheck.min.js')}}"></script>
+<script src="{{asset('backend/js/ckeditor/ckeditor.js')}}"></script>
 <!-- Custom Theme Scripts -->
 <script src="{{asset('backend/js/custom.min.js')}}"></script>
 <script src="{{asset('backend/js/my-js.js')}}"></script>

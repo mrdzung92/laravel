@@ -104,7 +104,7 @@ Route::group(['prefix' => $prefixAdmin], function () {
 
      // ===============slider==============
      $prefix         = 'article';
-     $controllerName = 'article';
+     $controllerName = 'article';   
      Route::group(['prefix' => $prefix], function () use ($controllerName) {
  
          $controller = ucfirst($controllerName) . 'Controller@';
