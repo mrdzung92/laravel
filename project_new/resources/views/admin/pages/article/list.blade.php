@@ -10,6 +10,7 @@
                     <th class="column-title"> # </th>
                     <th class="column-title">Article Info</th>
                     <th class="column-title">Thumb</th>
+                    <th class="column-title">Category</th>
                     <th class="column-title">Trạng thái</th>
                     <th class="column-title">Tạo mới</th>
                     <th class="column-title">Chỉnh sửa</th>
@@ -28,6 +29,7 @@
                             $link = HighLight::show($value['link'], $params['search'], 'link');
                             $image = Template::showItemThumb($controllerName, $value['thumb'], $value['name']);
                             $status = Template::showItemStatus($controllerName, $value['status'], $value['id']);
+                            $categoryName = $value['category_name'];
                             $createdHistory = Template::showItemHistory($value['created_by'], $value['created']);
                             $modifiedHistory = Template::showItemHistory($value['modified_by'], $value['modified']);
                             $listBtnAction = Template::showButtonAction($controllerName, $value['id']);
@@ -38,7 +40,8 @@
                                 <p><strong>Name: </strong>{!! $name !!}</p>
                                 <p><strong>Content: </strong>{!! $content !!}</p>
                             </td>
-                            <td>{!! $image !!}</td>
+                            <td>{!! $image !!}</td> 
+                            <td>{!! $categoryName !!}</td>
                             <td>{!! $status !!}</td>
                             <td>{!! $createdHistory !!}</td>
                             <td>{!! $modifiedHistory !!}</td>

@@ -33,8 +33,7 @@ class ArticleRequest extends FormRequest
         } 
         return [
             'name' => $nameCondition,
-            'description' => 'required',
-            'link' => 'bail|required|min:5|url',
+            'content' => 'required',    
             'status' => 'bail|in:active,inactive',  
             'thumb'  =>     $thumCondition  
         ];

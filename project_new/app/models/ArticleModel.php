@@ -1,6 +1,7 @@
 <?php
 
 namespace App\models;
+
 use App\models\AdminModel;
 use DB;
 
@@ -9,7 +10,7 @@ class ArticleModel extends AdminModel
 
     public function __construct()
     {
-        $this->table = 'article';
+        $this->table = 'article as a';
         $this->folderUpload = 'article';
         $this->fieldSearchAccept = ['id',  'name', 'content'];
         // những field không được thêm vào database
@@ -21,21 +22,21 @@ class ArticleModel extends AdminModel
         $result = null;
         if ($option['task'] == 'admin-list-item') {
             // $result = SliderModel::all('id','name','link');
-            $query = $this->select('id', 'name', 'content', 'thumb', 'created', 'created_by', 'modified', 'modified_by', 'status');
-
+            $query = $this->select('a.id', 'a.name', 'a.content', 'a.thumb', 'a.created', 'a.created_by', 'a.modified', 'a.modified_by', 'a.status','c.name as category_name    ')
+                ->leftJoin('category as c', 'a.category_id', '=', 'c.id');
             if ($params['filter']['status'] !== 'all') {
-                $query->where('status', $params['filter']['status']);
+                $query->where('a.status', $params['filter']['status']);
             }
 
             if ($params['search']['value'] !== '') {
                 if ($params['search']['field'] == 'all') {
                     $query->where(function ($query) use ($params) {
                         foreach ($this->fieldSearchAccept as $column) {
-                            $query->orWhere($column, 'LIKE', "%{$params['search']['value']}%");
+                            $query->orWhere('a.'.$column, 'LIKE', "%{$params['search']['value']}%");
                         }
                     });
                 } else if (in_array($params['search']['field'], $this->fieldSearchAccept)) {
-                    $query->where($params['search']['field'], 'LIKE', "%{$params['search']['value']}%");
+                    $query->where('a.'.$params['search']['field'], 'LIKE', "%{$params['search']['value']}%");
                 }
             }
 
@@ -44,9 +45,9 @@ class ArticleModel extends AdminModel
         }
 
         if ($option['task'] == 'news-list-items') {
-           $query = $this->select('id','name','content','thumb')
-           ->where('status','=','active')->limit(5);
-           $result =$query->get()->toArray();
+            $query = $this->select('id', 'name', 'content', 'thumb')
+                ->where('a.status', '=', 'active')->limit(5);
+            $result = $query->get()->toArray();
         }
         return $result;
     }
@@ -63,11 +64,11 @@ class ArticleModel extends AdminModel
                 if ($params['search']['field'] == 'all') {
                     $query->where(function ($query) use ($params) {
                         foreach ($this->fieldSearchAccept as $column) {
-                            $query->orWhere($column, 'LIKE', "%{$params['search']['value']}%");
+                            $query->orWhere('a.' . $column, 'LIKE', "%{$params['search']['value']}%");
                         }
                     });
                 } else if (in_array($params['search']['field'], $this->fieldSearchAccept)) {
-                    $query->where($params['search']['field'], 'LIKE', "%{$params['search']['value']}%");
+                    $query->where('a.' . $params['search']['field'], 'LIKE', "%{$params['search']['value']}%");
                 }
             }
             $result = $query->get()->toArray();
@@ -123,7 +124,7 @@ class ArticleModel extends AdminModel
     {
         $result = null;
         if ($option['task'] == 'get-item') {
-            $result = self::select('id', 'name', 'content', 'thumb', 'status','category_id')
+            $result = self::select('id', 'name', 'content', 'thumb', 'status', 'category_id')
                 ->where('id', $params['id'])->first()->toArray();
         }
         if ($option['task'] == 'get-thumb') {
