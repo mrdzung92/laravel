@@ -26,7 +26,7 @@
                             $index = $key + 1;
                             $class = $index % 2 == 0 ? 'even' : 'odd';
                             $name = HighLight::show($value['name'],$params['search'],'name');
-                            $display = Template::showItemSelect($controllerName, $value['display'], $value['id']);
+                            $display = Template::showItemSelect($controllerName, $value['display'], $value['id'],'display');
                             $status = Template::showItemStatus($controllerName, $value['status'], $value['id']);
                             $isHome = Template::showItemIsHome($controllerName, $value['is_home'], $value['id']);
                             $createdHistory = Template::showItemHistory($value['created_by'], $value['created']);

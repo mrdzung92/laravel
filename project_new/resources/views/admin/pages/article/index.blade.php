@@ -3,6 +3,7 @@
     use App\helper\template as template ;
     $xhtmlBtnFilter = template::showBtnFilter($controllerName,$itemsStatusCount,$params['filter']['status'],$params['search']);
     $xhtmlAreaSearch = template::showAreaSearch($controllerName,$params['search']);
+    $showDisplayTable =template::showDisplayTable();
 @endphp
 @section('content')
 @include('admin.templates.page_header',['pageIndex'=>true])
@@ -15,9 +16,9 @@
                 @include('admin.templates.x_title',['title'=>'Bộ lọc'])
                 <div class="x_content">
                     <div class="row">
-                        <div class="col-md-7">{!!$xhtmlBtnFilter!!}</div>
-                        <div class="col-md-5">{!!$xhtmlAreaSearch!!}</div>
-                
+                        <div class="col-md-4">{!!$xhtmlBtnFilter!!}</div>
+                        <div class="col-md-3">{!!$showDisplayTable!!}</div>
+                        <div class="col-md-5">{!!$xhtmlAreaSearch!!}</div>               
                     </div>
                 </div>
             </div>

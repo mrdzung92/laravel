@@ -12,8 +12,9 @@
                     <th class="column-title">Thumb</th>
                     <th class="column-title">Category</th>
                     <th class="column-title">Trạng thái</th>
-                    <th class="column-title">Tạo mới</th>
-                    <th class="column-title">Chỉnh sửa</th>
+                    <th class="column-title">Kiểu</th>
+                    {{--  //<th class="column-title">Tạo mới</th>  --}}
+                   {{--  // <th class="column-title">Chỉnh sửa</th>  --}}
                     <th class="column-title">Hành động</th>
                 </tr>
             </thead>
@@ -30,8 +31,9 @@
                             $image = Template::showItemThumb($controllerName, $value['thumb'], $value['name']);
                             $status = Template::showItemStatus($controllerName, $value['status'], $value['id']);
                             $categoryName = $value['category_name'];
-                            $createdHistory = Template::showItemHistory($value['created_by'], $value['created']);
-                            $modifiedHistory = Template::showItemHistory($value['modified_by'], $value['modified']);
+                            $type = Template::showItemSelect($controllerName, $value['type'], $value['id'],'type');
+                           // $createdHistory = Template::showItemHistory($value['created_by'], $value['created']);
+                          //  $modifiedHistory = Template::showItemHistory($value['modified_by'], $value['modified']);
                             $listBtnAction = Template::showButtonAction($controllerName, $value['id']);
                         @endphp
                         <tr class="{{ $class }} pointer">
@@ -43,8 +45,9 @@
                             <td>{!! $image !!}</td> 
                             <td>{!! $categoryName !!}</td>
                             <td>{!! $status !!}</td>
-                            <td>{!! $createdHistory !!}</td>
-                            <td>{!! $modifiedHistory !!}</td>
+                            <td>{!! $type !!}</td>
+                             {{--  //  <td>{!! $createdHistory !!}</td>  --}}
+                           {{--  // <td>{!! $modifiedHistory !!}</td>    --}}
                             <td class="last">{!! $listBtnAction !!}</td>
                         </tr>
                     @endforeach

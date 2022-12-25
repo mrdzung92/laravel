@@ -33,6 +33,13 @@ return [
             'grid' => ['name' => 'Grid'],         
             
         ],
+
+        'type' => [
+            'default' => ['name' => 'undifined'],
+            'feature' => ['name' => 'Feature'],
+            'normal' => ['name' => 'Normal'],         
+            
+        ],
         'search' => [
             'all' => ['name' => 'Search by All'],
             'id' => ['name' => 'Search by ID'],

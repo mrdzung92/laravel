@@ -102,33 +102,37 @@ Route::group(['prefix' => $prefixAdmin], function () {
         ]);
     });
 
-     // ===============slider==============
-     $prefix         = 'article';
-     $controllerName = 'article';   
-     Route::group(['prefix' => $prefix], function () use ($controllerName) {
- 
-         $controller = ucfirst($controllerName) . 'Controller@';
-         Route::get('/', [
-             'as' => $controllerName,
-             'uses' => $controller . 'index'
-         ]);
-         Route::get('form/{id?}', [
-             'as' => $controllerName . '/form',
-             'uses' => $controller . 'form'
-         ]);
-         Route::get('delete/{id}', [
-             'as' => $controllerName . '/delete',
-             'uses' => $controller . 'delete'
-         ]);
-         Route::get('change-status/{id}/{status}', [
-             'as' => $controllerName . '/change-status',
-             'uses' => $controller . 'changeStatus'
-         ]);
-         Route::post('save', [
-             'as' => $controllerName . '/save',
-             'uses' => $controller . 'save'
-         ]);
-     });
+    // ===============slider==============
+    $prefix         = 'article';
+    $controllerName = 'article';
+    Route::group(['prefix' => $prefix], function () use ($controllerName) {
+
+        $controller = ucfirst($controllerName) . 'Controller@';
+        Route::get('/', [
+            'as' => $controllerName,
+            'uses' => $controller . 'index'
+        ]);
+        Route::get('form/{id?}', [
+            'as' => $controllerName . '/form',
+            'uses' => $controller . 'form'
+        ]);
+        Route::get('delete/{id}', [
+            'as' => $controllerName . '/delete',
+            'uses' => $controller . 'delete'
+        ]);
+        Route::get('change-status/{id}/{status}', [
+            'as' => $controllerName . '/change-status',
+            'uses' => $controller . 'changeStatus'
+        ]);
+        Route::post('save', [
+            'as' => $controllerName . '/save',
+            'uses' => $controller . 'save'
+        ]);
+        Route::get('type/{id?}/{type_value?}', [
+            'as' => $controllerName . '/type',
+            'uses' => $controller . 'type'
+        ]);
+    });
 });
 
 // ===============home page==============

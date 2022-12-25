@@ -72,6 +72,17 @@ class ArticleController extends Controller
 
         echo '<h3>save</h3>';
     }
+
+    
+    public function type(Request $request)
+    {
+        $params['currentType'] =$request->type_value;
+        $params['id'] =$request->id;
+        $this->model->saveItem($params,['task'=>'change-type']);
+  
+        return redirect()->route($this-> controllerName)->with('status', 'Thay đổi kiểu hiện thị thành công');
+    }
+
     public function delete(Request $request)
     {
         $params['id'] = $request->id;

@@ -22,7 +22,7 @@ class ArticleModel extends AdminModel
         $result = null;
         if ($option['task'] == 'admin-list-item') {
             // $result = SliderModel::all('id','name','link');
-            $query = $this->select('a.id', 'a.name', 'a.content', 'a.thumb', 'a.created', 'a.created_by', 'a.modified', 'a.modified_by', 'a.status','c.name as category_name    ')
+            $query = $this->select('a.id', 'a.name', 'a.content', 'a.thumb', 'a.created', 'a.created_by', 'a.modified', 'a.modified_by', 'a.status','c.name as category_name','a.type')
                 ->leftJoin('category as c', 'a.category_id', '=', 'c.id');
             if ($params['filter']['status'] !== 'all') {
                 $query->where('a.status', $params['filter']['status']);
@@ -105,6 +105,14 @@ class ArticleModel extends AdminModel
                 $this->deleteThumb($currentThumb);
             }
             self::where('id', $params['id'])->update($this->repairParams($params));
+        }
+
+        if ($option['task'] == 'change-type') {
+            $data = [];
+            $data['modified'] = date('Y-m-d H:i:s', time());
+            $data['modified_by'] = 'admin';
+            $data['type'] = $params['currentType'];
+            self::where('id', $params['id'])->update($data);
         }
     }
 

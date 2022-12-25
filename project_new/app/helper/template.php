@@ -93,10 +93,26 @@ class Template
         return $xhtml;
     }
 
-    public static function showItemSelect($controllerName, $displayValue, $id)
+    public static function showDisplayTable()
     {
-        $tmpDisplay = Config::get('zendvn.template.display');
-        $link   = route($controllerName.'/display',['id'=>$id,'display_value'=>'value_new']);
+        $xhtml = null;
+        $xhtml = sprintf('
+        <a href="javascript:;" class="dropdown-toggle btn btn-primary" data-toggle="dropdown" aria-expanded="false" type="button">
+        table display
+        </a>
+        <ul class="dropdown-menu dropdown-usermenu">
+            <li><input type="checkbox" value="0">1</li>
+            <li><input type="checkbox" value="1">2</li>
+            <li><input type="checkbox" value="2">3</li>
+            <li><input type="checkbox" value="3">4</li>
+        </ul>');
+        return $xhtml;
+    }
+
+    public static function showItemSelect($controllerName, $displayValue, $id,$fiedName)
+    {
+        $tmpDisplay = Config::get('zendvn.template.'.$fiedName);
+        $link   = route($controllerName.'/'.$fiedName,['id'=>$id,'display_value'=>'value_new']);
         $xhtml = sprintf('<select name="select_change_attr" data-url="%s" class="form-control">',$link);
         if(array_key_exists($displayValue,$tmpDisplay)){
             unset($tmpDisplay['default']);
