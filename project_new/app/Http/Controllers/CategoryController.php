@@ -61,7 +61,7 @@ class CategoryController extends Controller
             return redirect()->route($this->controllerName)->with('status',$notify);
         }
         
-        echo '<h3>save</h3>';
+       
     
        
     }

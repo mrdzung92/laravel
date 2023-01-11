@@ -5,7 +5,7 @@ $categoryName = $item['name'];
 <div class="world">
     <div class="section_title_container d-flex flex-row align-items-start justify-content-start">
         <div>
-            <div class="section_title">{{ucwords($categoryName) }}</div>
+            <div class="section_title">{{ucwords($categoryName)}}</div>
         </div>
         <div class="section_bar"></div>
     </div>
