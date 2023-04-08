@@ -35,7 +35,7 @@ class Template
         $isHomeValue = array_key_exists($isHomeValue, $isHomeTemp) ? $isHomeValue : 'default';
         $currentTemplIsHome = $isHomeTemp[$isHomeValue];
 
-        $link = route($controllerName . '/isHome', ['is_home' => $isHomeValue, 'id' => $id]);
+        $link = route($controllerName . '/isHome', ['isHome' => $isHomeValue, 'id' => $id]);
         $link = url( $link) . '?' . http_build_query((request()->input()));
 
       $html = sprintf('<a href="%s" type="button"

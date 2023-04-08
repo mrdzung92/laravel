@@ -13,7 +13,7 @@
         $htmlMenuWed .= sprintf('<li %s><a href="%s">%s</a></li>', $classActive ,$link,$value['name']);
         $htmlMenuMobile .=' <li class="menu_mm"><a href="#">'.$value['name'].'</a></li>';
     }
-
+    $htmlMenuWed .=sprintf('<li %s><a href="%s">TT Tổng hợp</a></li>', $classActive ,route('rss/tin-tuc-tong-hop'));
     if(session('userInfo')){
         $htmlMenuWed .=sprintf('<li %s><a href="%s">%s</a></li>', $classActive ,route('auth/logout'),'Đăng xuất');
     }else {

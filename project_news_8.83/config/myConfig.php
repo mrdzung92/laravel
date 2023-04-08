@@ -48,6 +48,13 @@ return [
             'default' => ['name' => 'Chưa xác định', 'class' => 'btn-danger'],
         ],
 
+        'source' => [
+            'VnExpress' => ['name' => 'VnExpress'],
+            '24h' => ['name' => '24h.com.vn'],
+            'ThannNien' => ['name' => 'Thanh Niên'],
+            
+        ],
+
         'search' => [
             'all' => ['name' => 'Search by All'],
             'id' => ['name' => 'Search by ID'],
@@ -58,6 +65,7 @@ return [
             'description' => ['name' => 'Search by Description'],
             'link' => ['name' => 'Search by Link'],
             'content' => ['name' => 'Search by Content'],
+            'source' => ['name' => 'Search by Source'],
 
         ],
         'button' => [
@@ -74,6 +82,7 @@ return [
             'category' => ['all', 'id', 'name'],
             'article' => ['all', 'name', 'content'],
             'user' => ['all','username', 'email', ],
+            'rss' => ['all', 'id', 'name', 'source','link'],
         ],
         'button' => [
             'default' => ['edit', 'delete'],
@@ -81,6 +90,7 @@ return [
             'category' => ['edit', 'delete'],
             'article' => ['edit', 'delete'],
             'user' => ['edit'],
+            'rss' => ['edit', 'delete'],
         ],
     ],
 ];

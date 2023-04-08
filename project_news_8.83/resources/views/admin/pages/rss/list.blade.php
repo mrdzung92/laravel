@@ -7,10 +7,10 @@
     <thead>
         <tr class="headings">
             <th class="column-title">#</th>
-            <th class="column-title">Tên</th>
+            <th class="column-title" width="40%">Rss info</th>
             <th class="column-title">Trạng thái</th>
-            <th class="column-title">Hiển thị ngoài trang chủ</th>
-            <th class="column-title">Kiểu hiện thị</th>
+            <th class="column-title">Sắp xếp</th>
+            <th class="column-title">Nguồn</th>
             <th class="column-title">Tạo mới</th>
             <th class="column-title">Chỉnh sửa</th>
             <th class="column-title">Hành động</th>
@@ -24,19 +24,23 @@
                     $id = $item->id;
                     $class = $index % 2 == 0 ? 'even' : 'odd';
                     $name = Highlight::show( $item->name,$params['search'],'name');
+                    $link = Highlight::show($item->link,$params['search'],'link');
+                    $ordering = $item->ordering;
                     $status = Template::showItemStatus($item->status, $id, $controllerName);
-                    $isHome =  Template::showItemIsHome($item->is_home, $id, $controllerName);
-                    $display = Template::showItemSelect($item->display, $id, $controllerName,'display');
+                    $source = Template::showItemSelect($item->source, $id, $controllerName,'source');
                     $createdHistory = Template::showItemHistory($item->created, $item->created_by);
                     $modifiedHistory = Template::showItemHistory($item->modified, $item->modified_by);
                     $listButtonAction = Template::showButtonAction($controllerName,$id);
                 @endphp
                 <tr class="{{ $class}} pointer">
                     <td class="">{{ $key + 1 }}</td>
-                    <td>{!! $name !!}</td>
+                    <td>
+                        <p><strong>Name : </strong>{!! $name !!}</p>
+                        <p><strong>Link : </strong>{!! $link !!}</p>                      
+                    </td>
                     <td> {!! $status !!}</td>
-                    <td> {!! $isHome !!}</td>
-                    <td> {!! $display !!}</td>
+                    <td> {!! $ordering !!}</td>
+                    <td> {!! $source !!}</td>
                     <td>{!! $createdHistory !!}</td>
                     <td>{!! $modifiedHistory !!}</td>
                     <td class="last">{!!$listButtonAction!!}</td>    

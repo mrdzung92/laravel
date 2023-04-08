@@ -200,6 +200,46 @@ Route::group(['namespace'=>'Admin','prefix'=>$prefixAdmin ,'middleware'=>['permi
 
     });
 
+      // ===============rss===============
+      $prefix = 'rss';
+      $controllerName = 'rss';
+      Route::prefix($prefix)->group(function () use ($controllerName, $prefix) {
+  
+          $controller = ucfirst($controllerName) . 'Controller@';
+  
+          Route::get('/', [
+              'as' => $controllerName,
+              'uses' => $controller . 'index',
+          ]);
+  
+          Route::get('/form/{id?}', [
+              'as' => $controllerName . '/form',
+              'uses' => $controller . 'form',
+          ])->where('id', '[0-9]+');
+  
+          Route::post('save', [
+              'as' => $controllerName . '/save',
+              'uses' => $controller . 'save',
+          ]);
+  
+          Route::get('/delete/{id}', [
+              'as' => $controllerName . '/delete',
+              'uses' => $controller . 'delete',
+          ])->where('id', '[0-9]+');
+  
+          Route::get('/changeStatus-{status}/{id}', [
+              'as' => $controllerName . '/status',
+              'uses' => $controller . 'status',
+          ])->where('id', '[0-9]+');
+
+         
+          Route::get('/changeSource-{source}/{id}', [
+            'as' => $controllerName . '/source',
+            'uses' => $controller . 'source',
+        ])->where('id', '[0-9]+');
+  
+      });
+
 });
     // =============FRONTEND=========
 Route::group(['namespace'=>'News','prefix'=>$prefixNews],function () {
@@ -225,9 +265,7 @@ Route::group(['namespace'=>'News','prefix'=>$prefixNews],function () {
     $controllerName = 'category';
    
     Route::prefix($prefix)->group(function () use ($controllerName, $prefix ) {
-
         $controller = ucfirst($controllerName) . 'Controller@';
-
         Route::get('/{category_name}-{category_id}.html', [
             'as' => $controllerName.'/index',
             'uses' => $controller . 'index',
@@ -288,6 +326,28 @@ Route::group(['namespace'=>'News','prefix'=>$prefixNews],function () {
          ]);
  
      });
+
+     // ===============RSS===============
+    $prefix = '';
+    $controllerName = 'rss';
+    Route::prefix($prefix)->group( function () use ($controllerName, $prefix) {
+        $controller = ucfirst($controllerName) . 'Controller@';
+        Route::get('/tin-tuc-tong-hop', [
+            'as' => $controllerName.'/tin-tuc-tong-hop',
+            'uses' => $controller . 'index',
+        ]);
+
+        Route::get('/get-gold', [
+            'as' => $controllerName.'/get-gold',
+            'uses' => $controller . 'getGold',
+        ]);
+
+        Route::get('/get-coin', [
+            'as' => $controllerName.'/get-coin',
+            'uses' => $controller . 'getCoin',
+        ]);
+
+    });
 
 
 });
