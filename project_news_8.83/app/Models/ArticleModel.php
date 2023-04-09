@@ -173,7 +173,7 @@ class ArticleModel extends AdminModel
 
         if ($option['task'] === 'change-type') {
             $this::where('id', $params['id'])
-                ->update(['type' => $params['currentType']]);
+                ->update(['type' => $params['currentValue']]);
 
         }
     }

@@ -8,16 +8,33 @@ return [
         'long_time' => 'H:m:s d-m-Y',
         'short_time' => 'd-m-Y',
     ],
+    'notify' => [
+        'status' => [
+            'success' => 'Cập nhật trạng thái thành công',
+            'failed' => 'Có lỗi xảy ra',
+        ],
+
+        'isHome' => [
+            'success' => 'Cập nhật trạng thái hiển thị thành công',
+            'failed' => 'Có lỗi xảy ra',
+        ],
+
+        'changeSelectBox' => [
+            'success' => 'Thay đổi thành công',
+            'failed' => 'Có lỗi xảy ra',
+        ],
+
+    ],
     'template' => [
         'form' => [
             'input' => [
-                'class' => 'form-control col-md-6 col-xs-12" name="name'
+                'class' => 'form-control col-md-6 col-xs-12" name="name',
             ],
             'label' => [
-                'class' => 'control-label col-md-3 col-sm-3 col-xs-12'
+                'class' => 'control-label col-md-3 col-sm-3 col-xs-12',
             ],
             'form_ckeditor' => [
-                'class' => 'control-label col-md-3 col-sm-3 col-xs-12 ckeditor'
+                'class' => 'control-label col-md-3 col-sm-3 col-xs-12 ckeditor',
             ],
         ],
         'status' => [
@@ -52,7 +69,7 @@ return [
             'VnExpress' => ['name' => 'VnExpress'],
             '24h' => ['name' => '24h.com.vn'],
             'ThannNien' => ['name' => 'Thanh Niên'],
-            
+
         ],
 
         'search' => [
@@ -81,8 +98,8 @@ return [
             'default' => ['fullname', 'name'],
             'category' => ['all', 'id', 'name'],
             'article' => ['all', 'name', 'content'],
-            'user' => ['all','username', 'email', ],
-            'rss' => ['all', 'id', 'name', 'source','link'],
+            'user' => ['all', 'username', 'email'],
+            'rss' => ['all', 'id', 'name', 'source', 'link'],
         ],
         'button' => [
             'default' => ['edit', 'delete'],

@@ -2,26 +2,24 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+
 use Illuminate\Http\Request;
 use App\Models\UserModel as MainModel;
 use App\Http\Requests\UserRequest as MainRequest;
-class UserController extends Controller
+class UserController extends AdminMainController
 {
-    private $pathViewController = 'admin.pages.user.';
-    private $controllerName = 'user';
-    private $params =[];
-    private $model;
 
     public function __construct()
     {
+        $this->pathViewController = 'admin.pages.user.';
+        $this->controllerName = 'user';
         $this->model = new MainModel();
-        $this->params =[
-            'pagination'=>[
-                'totalItemPerPage'=>5
-            ]
-        ];
-        view()->share('controllerName', $this->controllerName);
+        parent::__construct($this->controllerName, $this->model);
+        $this->params = [
+         'pagination' => [
+             'totalItemPerPage' =>5,
+         ],
+     ];
         
     }
 
@@ -59,10 +57,7 @@ class UserController extends Controller
 
     public function status(Request $request)
     {
-        $params['currentStatus'] = $request->status;
-        $params['id'] = $request->id;
-       $this->model->saveItem( $params,['task'=>'changeStatus']);
-        return redirect()->route($this->controllerName)->with('my_notify','Cập nhật trạng thái thành công');
+        return  parent::status($request);
     }
 
     public function changePwd(MainRequest $request)
@@ -76,11 +71,12 @@ class UserController extends Controller
 
     public function level(Request $request)
     {
-        $params['currentLevel'] = $request->level;
-        $params['id'] = $request->id;
+ return $this->changeSelectBoxAjax($request,$request->level,'changeLevel');
+    //     $params['currentLevel'] = $request->level;
+    //     $params['id'] = $request->id;
 
-       $this->model->saveItem( $params,['task'=>'changeLevel']);
-        return redirect()->route($this->controllerName)->with('my_notify','Cập nhật trạng thái thành công');
+    //    $this->model->saveItem( $params,['task'=>'changeLevel']);
+    //     return redirect()->route($this->controllerName)->with('my_notify','Cập nhật trạng thái thành công');
     }
 
     public function formChangeLevel(MainRequest $request)

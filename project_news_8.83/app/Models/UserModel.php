@@ -101,7 +101,7 @@ class UserModel extends AdminModel
 
         if ($option['task'] === 'changeLevel') {
             $this::where('id', $params['id'])
-                ->update(['level' =>$params['currentLevel']]);
+                ->update(['level' =>$params['currentValue']]);
         }
 
         if ($option['task'] === 'change-password') {

@@ -2,28 +2,25 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+
 use App\Http\Requests\ArticleRequest as MainRequest;
 use App\Models\ArticleModel as MainModel;
 use App\Models\CategoryModel as CategoryModel;
 use Illuminate\Http\Request;
 
-class ArticleController extends Controller
+class ArticleController extends AdminMainController
 {
-    private $pathViewController = 'admin.pages.article.';
-    private $controllerName = 'article';
-    private $params = [];
-    private $model;
-
     public function __construct()
     {
+        $this->pathViewController = 'admin.pages.article.';
+        $this->controllerName = 'article';
         $this->model = new MainModel();
+        parent::__construct($this->controllerName, $this->model);
         $this->params = [
-            'pagination' => [
-                'totalItemPerPage' => 5,
-            ],
-        ];
-        view()->share('controllerName', $this->controllerName);
+         'pagination' => [
+             'totalItemPerPage' =>5,
+         ],
+     ];
 
     }
 
@@ -64,10 +61,7 @@ class ArticleController extends Controller
 
     public function status(Request $request)
     {
-        $params['currentStatus'] = $request->status;
-        $params['id'] = $request->id;
-        $this->model->saveItem($params, ['task' => 'changeStatus']);
-        return redirect()->route($this->controllerName)->with('my_notify', 'Cập nhật trạng thái thành công');
+        return  parent::status($request);
     }
 
     public function save(MainRequest $request)
@@ -88,9 +82,10 @@ class ArticleController extends Controller
 
     public function type(Request $request)
     {
-        $params['currentType'] = $request->type;
-        $params['id'] = $request->id;
-       $this->model->saveItem( $params,['task'=>'change-type']);
-        return redirect()->route($this->controllerName,request()->input())->with('my_notify','Cập nhật trạng thái thành công');
+        return $this->changeSelectBoxAjax($request,$request->type,'change-type');
+    //     $params['currentType'] = $request->type;
+    //     $params['id'] = $request->id;
+    //    $this->model->saveItem( $params,['task'=>'change-type']);
+    //     return redirect()->route($this->controllerName,request()->input())->with('my_notify','Cập nhật trạng thái thành công');
     }
 }

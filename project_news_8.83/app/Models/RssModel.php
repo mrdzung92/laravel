@@ -113,6 +113,12 @@ class RssModel extends AdminModel
             self::where('id', $params['id'])->update($this->repairParams($params));
 
         }
+
+        if ($option['task'] === 'change-source') {
+            $this::where('id', $params['id'])
+                ->update(['source' => $params['currentValue']]);
+
+        }
     }
 
     public function deleteItem($params = null, $option = null)

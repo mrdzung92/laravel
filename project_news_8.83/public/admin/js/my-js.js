@@ -1,3 +1,5 @@
+// const { zip } = require("lodash");
+
 $(document).ready(function () {
 	let $btnSearch = $("button#btn-search");
 	let $btnClearSearch = $("button#btn-clear");
@@ -104,8 +106,21 @@ $(document).ready(function () {
 	$selectChangeAttr.on('change', function () {
 		let select_value = $(this).val();
 		let $url = $(this).data('url');
-		console.log( $url.replace('value_new', select_value))
-		window.location.href = $url.replace('value_new', select_value);
+		let selectBox = $(this);
+		// console.log( $url.replace('value_new', select_value))
+		// window.location.href = $url.replace('value_new', select_value);
+		$url =$url.replace('value_new', select_value);
+		$.get($url,function(res){	
+			if(res.success){
+				selectBox.css('position','relative')
+				selectBox.notify(
+					res.msg, 
+					{ position:"right",
+				className:'success' }
+				  );
+			}			
+		},'json')
+
 	});
 
 	// $selectChangeAttrAjax.on('change', function () {
@@ -144,5 +159,26 @@ $(document).ready(function () {
 	$('.btn-delete').on('click', function () {
 		if (!confirm('Bạn có chắc muốn xóa phần tử?'))
 			return false;
+	});
+
+	$('.ajax-button').on('click', function () {
+		let url = $(this).data('url');
+		let btn = $(this)
+		$.get(url,function(res){
+			console.log(res)
+			if(res.success){
+				btn.removeClass(res.classRemove)
+				btn.addClass(res.classAdd)
+				btn.data('url',res.url)
+				btn.html(res.newName)
+				btn.css('position','relative')
+				btn.notify(
+					res.msg, 
+					{ position:"right",
+				className:'success' }
+				  );
+			}			
+		},'json')
+		
 	});
 });

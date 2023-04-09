@@ -1,27 +1,23 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\RssModel as MainModel;
 use App\Http\Requests\RssRequest as MainRequest;
-class RssController extends Controller
+class RssController extends AdminMainController
 {
-    private $pathViewController = 'admin.pages.rss.';
-    private $controllerName = 'rss';
-    private $params =[];
-    private $model;
 
     public function __construct()
     {
-        $this->model = new MainModel();
-        $this->params =[
-            'pagination'=>[
-                'totalItemPerPage'=>5
-            ]
-        ];
-        view()->share('controllerName', $this->controllerName);
+        $this->pathViewController = 'admin.pages.rss.';
+       $this->controllerName = 'rss';
+       $this->model = new MainModel();
+       parent::__construct($this->controllerName, $this->model);
+       $this->params = [
+        'pagination' => [
+            'totalItemPerPage' =>5,
+        ],
+    ];
         
     }
 
@@ -58,14 +54,12 @@ class RssController extends Controller
 
     public function status(Request $request)
     {
-        $params['currentStatus'] = $request->status;
-        $params['id'] = $request->id;
-       $this->model->saveItem( $params,['task'=>'changeStatus']);
-        return redirect()->route($this->controllerName)->with('my_notify','Cập nhật trạng thái thành công');
+        return  parent::status($request);
     }
 
     public function source(Request $request)
     {
+        return $this->changeSelectBoxAjax($request,$request->source,'change-source');
     //     $params['currentStatus'] = $request->status;
     //     $params['id'] = $request->id;
     //    $this->model->saveItem( $params,['task'=>'changeStatus']);

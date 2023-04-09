@@ -21,9 +21,9 @@ class Template
         $statusValue = array_key_exists($statusValue, $tmplStatus) ? $statusValue : 'default';
         $currentStatus = $tmplStatus[$statusValue];
         $link = route($controllerName . '/status', ['status' => $status, 'id' => $id]);
-        $link = url( $link) . '?' . http_build_query((request()->input()));
-        $html = sprintf('<a href="%s" type="button"
-        class="btn btn-round %s">%s</a>', $link, $currentStatus['class'], $currentStatus['name']);
+        // $link = url( $link) . '?' . http_build_query((request()->input()));
+        $html = sprintf('<button data-url="%s" type="button"
+        class="btn btn-round %s ajax-button">%s</button>', $link, $currentStatus['class'], $currentStatus['name']);
         return $html;
     }
 
@@ -36,10 +36,10 @@ class Template
         $currentTemplIsHome = $isHomeTemp[$isHomeValue];
 
         $link = route($controllerName . '/isHome', ['isHome' => $isHomeValue, 'id' => $id]);
-        $link = url( $link) . '?' . http_build_query((request()->input()));
+        // $link = url( $link) . '?' . http_build_query((request()->input()));
 
-      $html = sprintf('<a href="%s" type="button"
-        class="btn btn-round %s">%s</a>', $link, $currentTemplIsHome['class'], $currentTemplIsHome['name']);
+      $html = sprintf('<button data-url="%s" type="button"
+        class="btn btn-round ajax-button %s">%s</button>', $link, $currentTemplIsHome['class'], $currentTemplIsHome['name']);
         return $html;
     }
 

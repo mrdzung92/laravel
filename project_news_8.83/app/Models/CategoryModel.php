@@ -149,7 +149,7 @@ class CategoryModel extends AdminModel
 
         if ($option['task'] === 'change-display') {
             $this::where('id', $params['id'])
-                ->update(['display' => $params['currentDisplay']]);
+                ->update(['display' => $params['currentValue']]);
 
         }
     }
