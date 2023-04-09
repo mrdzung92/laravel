@@ -119,6 +119,11 @@ class RssModel extends AdminModel
                 ->update(['source' => $params['currentValue']]);
 
         }
+        if ($option['task'] === 'change-ordering') {
+            $this::where('id', $params['id'])
+                ->update(['ordering' => $params['currentValue']]);
+
+        }
     }
 
     public function deleteItem($params = null, $option = null)

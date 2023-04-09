@@ -83,4 +83,16 @@ class AdminMainController extends Controller
         return response()->json($result);
     }
 
+    public function orderingAjax(Request $request)
+    {
+        $params['currentValue'] = $request->ordering;
+        $params['id'] = $request->id;
+        $this->model->saveItem($params, ['task' => 'change-ordering']);
+        $result = [
+            'success' => true,
+            'msg' => Config::get('myConfig.notify.changeOrdering.success'),
+        ];
+        return response()->json($result);
+    }
+
 }

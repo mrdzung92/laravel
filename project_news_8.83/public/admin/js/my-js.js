@@ -10,7 +10,7 @@ $(document).ready(function () {
 	let $selectFilter = $("select[name = select_filter]");
 	let $selectChangeAttr = $("select[name =  select_change_attr]");
 	let $selectChangeAttrAjax = $("select[name =  select_change_attr_ajax]");
-
+	let $ChangeOrderingAjax = $('.ajax-ordering');
 
 	$("a.select-field").click(function (e) {
 		e.preventDefault();
@@ -74,6 +74,24 @@ $(document).ready(function () {
 	
 		window.location.href = pathname + "?" + link.slice(0, -1) + 'select_field=' + select_field + '&select_value=' + select_value;
 	});
+
+	$ChangeOrderingAjax.blur(function(){
+		let select_value = $(this).val();
+		let $url = $(this).data('url');
+		$url =$url.replace('value_new', select_value);
+		let inputBox = $(this)
+		$.get($url,function(res){	
+			if(res.success){
+				inputBox.css('position','relative')
+				inputBox.notify(
+					res.msg, 
+					{ position:"right",
+				className:'success' }
+				  );
+			}			
+		},'json')
+
+	  });
 
 	// Change attributes with selectbox
 	// $selectChangeAttr.on('change', function() {

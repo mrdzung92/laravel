@@ -7,9 +7,9 @@
     <thead>
         <tr class="headings">
             <th class="column-title">#</th>
-            <th class="column-title" width="40%">Rss info</th>
+            <th class="column-title" width="30%">Rss info</th>
             <th class="column-title">Trạng thái</th>
-            <th class="column-title">Sắp xếp</th>
+            <th class="column-title" width="5%" >Sắp xếp</th>
             <th class="column-title">Nguồn</th>
             <th class="column-title">Tạo mới</th>
             <th class="column-title">Chỉnh sửa</th>
@@ -25,12 +25,13 @@
                     $class = $index % 2 == 0 ? 'even' : 'odd';
                     $name = Highlight::show( $item->name,$params['search'],'name');
                     $link = Highlight::show($item->link,$params['search'],'link');
-                    $ordering = $item->ordering;
+                    $ordering = Form::number('ordering', $item->ordering ?? '',['style'=>'width:50px;','class'=>'ajax-ordering','data-url'=>route($controllerName . '/ordering', ['ordering' => 'value_new', 'id' => $id])]);
                     $status = Template::showItemStatus($item->status, $id, $controllerName);
                     $source = Template::showItemSelect($item->source, $id, $controllerName,'source');
                     $createdHistory = Template::showItemHistory($item->created, $item->created_by);
                     $modifiedHistory = Template::showItemHistory($item->modified, $item->modified_by);
                     $listButtonAction = Template::showButtonAction($controllerName,$id);
+
                 @endphp
                 <tr class="{{ $class}} pointer">
                     <td class="">{{ $key + 1 }}</td>
@@ -39,7 +40,7 @@
                         <p><strong>Link : </strong>{!! $link !!}</p>                      
                     </td>
                     <td> {!! $status !!}</td>
-                    <td> {!! $ordering !!}</td>
+                    <td > {!! $ordering !!}</td>
                     <td> {!! $source !!}</td>
                     <td>{!! $createdHistory !!}</td>
                     <td>{!! $modifiedHistory !!}</td>

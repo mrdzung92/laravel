@@ -28,7 +28,7 @@ class CategoryModel extends AdminModel
 
         $result = null;
         if ($option['task'] === 'admin-list-item') {
-            $query = $this->select('id', 'name','is_home', 'display' ,'created', 'created_by', 'modified', 'modified_by', 'status');
+            $query = $this->select('id', 'name','is_home','ordering', 'display' ,'created', 'created_by', 'modified', 'modified_by', 'status');
 
             if ($params['filter']['status'] !== 'all') {
                 $query->where('status', '=', $params['filter']['status']);
@@ -150,6 +150,12 @@ class CategoryModel extends AdminModel
         if ($option['task'] === 'change-display') {
             $this::where('id', $params['id'])
                 ->update(['display' => $params['currentValue']]);
+
+        }
+
+        if ($option['task'] === 'change-ordering') {
+            $this::where('id', $params['id'])
+                ->update(['ordering' => $params['currentValue']]);
 
         }
     }

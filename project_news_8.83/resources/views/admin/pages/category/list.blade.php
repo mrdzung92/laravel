@@ -10,6 +10,7 @@
             <th class="column-title">Tên</th>
             <th class="column-title">Trạng thái</th>
             <th class="column-title">Hiển thị ngoài trang chủ</th>
+            <th class="column-title">Sắp xếp</th>
             <th class="column-title">Kiểu hiện thị</th>
             <th class="column-title">Tạo mới</th>
             <th class="column-title">Chỉnh sửa</th>
@@ -26,6 +27,7 @@
                     $name = Highlight::show( $item->name,$params['search'],'name');
                     $status = Template::showItemStatus($item->status, $id, $controllerName);
                     $isHome =  Template::showItemIsHome($item->is_home, $id, $controllerName);
+                    $ordering = Form::number('ordering', $item->ordering ?? '',['style'=>'width:50px;','class'=>'ajax-ordering','data-url'=>route($controllerName . '/ordering', ['ordering' => 'value_new', 'id' => $id])]);
                     $display = Template::showItemSelect($item->display, $id, $controllerName,'display');
                     $createdHistory = Template::showItemHistory($item->created, $item->created_by);
                     $modifiedHistory = Template::showItemHistory($item->modified, $item->modified_by);
@@ -36,7 +38,8 @@
                     <td>{!! $name !!}</td>
                     <td> {!! $status !!}</td>
                     <td> {!! $isHome !!}</td>
-                    <td> {!! $display !!}</td>
+                    <td> {!! $ordering !!}</td>
+                    <td> {!! $display !!}</td>             
                     <td>{!! $createdHistory !!}</td>
                     <td>{!! $modifiedHistory !!}</td>
                     <td class="last">{!!$listButtonAction!!}</td>    

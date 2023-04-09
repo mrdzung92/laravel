@@ -143,6 +143,11 @@ Route::group(['namespace'=>'Admin','prefix'=>$prefixAdmin ,'middleware'=>['permi
             'uses' => $controller . 'changeDisplay',
         ])->where('id', '[0-9]+');
 
+        Route::get('/changeOrdering-{ordering}/{id}', [
+            'as' => $controllerName . '/ordering',
+            'uses' => $controller . 'orderingAjax',
+        ])->where('id', '[0-9]+');
+
     });
 
     // ===============Article===============
@@ -220,6 +225,11 @@ Route::group(['namespace'=>'Admin','prefix'=>$prefixAdmin ,'middleware'=>['permi
           Route::get('/changeSource-{source}/{id}', [
             'as' => $controllerName . '/source',
             'uses' => $controller . 'source',
+        ])->where('id', '[0-9]+');
+
+        Route::get('/changeOrdering-{ordering}/{id}', [
+            'as' => $controllerName . '/ordering',
+            'uses' => $controller . 'orderingAjax',
         ])->where('id', '[0-9]+');
   
       });

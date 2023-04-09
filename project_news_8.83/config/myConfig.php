@@ -23,6 +23,10 @@ return [
             'success' => 'Thay đổi thành công',
             'failed' => 'Có lỗi xảy ra',
         ],
+        'changeOrdering' => [
+            'success' => 'Thay đổi vị trí sắp xếp thành công',
+            'failed' => 'Có lỗi xảy ra',
+        ],
 
     ],
     'template' => [
