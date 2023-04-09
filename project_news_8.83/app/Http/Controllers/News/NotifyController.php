@@ -5,7 +5,7 @@ namespace App\Http\Controllers\News;
 use App\Models\ArticleModel as ArticleModel;
 use Illuminate\Http\Request;
 
-class NotifyController extends Controller
+class NotifyController extends NewsMainController
 {
 
     public function __construct()

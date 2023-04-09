@@ -1,24 +1,24 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
-class DashboardController extends Controller
+use App\Models\DashboardModel as MainModel;
+class DashboardController extends AdminMainController
 {
-    private $pathViewController = 'admin.pages.dashboard.';
-    private $controllerName = 'dashboard';
 
     public function __construct()
     {
-
-        view()->share('controllerName', $this->controllerName);
+        $this->pathViewController = 'admin.pages.dashboard.';
+        $this->controllerName = 'dashboard';
+        $this->model = new MainModel();
+        parent::__construct();
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        return view($this->pathViewController . 'index');
+        $params['table'] = ['article','user','category','slider'];      
+        $itemsCount =  $this->model-> countItems($params);
+        return view($this->pathViewController . 'index',['itemsCount'=>$itemsCount]);
     }
    
 }

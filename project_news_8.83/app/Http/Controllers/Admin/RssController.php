@@ -40,7 +40,6 @@ class RssController extends AdminMainController
                 $notify = 'Cập nhật phần tử thành công';
             }
             $this->model->saveItem($params, ['task' => $task]);
-
             return redirect()->route($this->controllerName)->with('my_notify', $notify);
         }
     }

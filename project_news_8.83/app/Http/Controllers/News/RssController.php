@@ -6,7 +6,7 @@ use App\Helpers\Feed;
 use App\Models\RssModel as RssModel;
 use Illuminate\Http\Request;
 
-class RssController extends Controller
+class RssController extends NewsMainController
 {
 
     public function __construct()

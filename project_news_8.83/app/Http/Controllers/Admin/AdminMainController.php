@@ -15,10 +15,9 @@ class AdminMainController extends Controller
 
     public function __construct()
     {
-
         view()->share('controllerName', $this->controllerName);
     }
-
+    
     public function index(Request $request)
     {
         $this->params['filter']['status'] = $request->input('filter_status', 'all');

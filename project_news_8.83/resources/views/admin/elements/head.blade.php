@@ -9,6 +9,7 @@
 <link href="{{asset('admin/asset/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
 <!-- Font Awesome -->
 <link href="{{asset('admin/css/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 <!-- NProgress -->
 <link href="{{asset('admin/asset/nprogress/nprogress.css')}}" rel="stylesheet">
 <!-- iCheck -->
@@ -19,4 +20,5 @@
 <link href="{{asset('admin/css/custom.min.css')}}" rel="stylesheet">
 <!-- Custom Theme Style -->
 <link href="{{asset('admin/css/mycss.css')}}" rel="stylesheet">
+<link href="{{asset('admin/css/dashboard.css')}}" rel="stylesheet">
 

@@ -8,16 +8,15 @@ use App\Models\CategoryModel as CategoryModel;
 
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
-{
-    private $pathViewController = 'news.pages.category.';
-    private $controllerName = 'category';
-    private $params = [];
-    private $model;
-
+class CategoryController extends NewsMainController
+{ 
     public function __construct()
     {
-        view()->share('controllerName', $this->controllerName);
+       $this->pathViewController = 'news.pages.category.';
+       $this->controllerName = 'category';
+       $this->params = [];
+       $this->model;
+        parent::__construct();
 
     }
 

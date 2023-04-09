@@ -2,24 +2,24 @@
 
 namespace App\Http\Controllers\News;
 
-use App\Http\Controllers\Controller;
+
 use App\Models\ArticleModel as ArticleModel;
 use App\Models\CategoryModel as CategoryModel;
 use App\Models\SliderModel as SliderModel;
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class HomeController extends NewsMainController
 {
-    private $pathViewController = 'news.pages.home.';
-    private $controllerName = 'home';
-    private $params = [];
-    private $model;
-
     public function __construct()
     {
-        view()->share('controllerName', $this->controllerName);
+       $this->pathViewController = 'news.pages.home.';
+       $this->controllerName = 'home';
+       $this->params = [];
+       $this->model;
+        parent::__construct();
 
     }
+
 
     public function index(Request $request)
     {

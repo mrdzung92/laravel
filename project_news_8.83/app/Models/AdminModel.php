@@ -45,4 +45,6 @@ class AdminModel extends Model
     {
        return array_diff_key($params, array_flip($this->arrayCrudNotAccepted));
     }
+
+   
 }
