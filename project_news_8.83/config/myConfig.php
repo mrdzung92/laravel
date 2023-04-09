@@ -2,7 +2,7 @@
 return [
     'url' => [
         'prefix_admin' => 'admin69',
-        'prefix_news' => 'news69',
+        'prefix_news' => '',
     ],
     'format' => [
         'long_time' => 'H:m:s d-m-Y',
