@@ -1,6 +1,5 @@
 <?php
 namespace App\Helpers;
-
 use Config;
 
 class Template
@@ -180,4 +179,12 @@ class Template
         $content = str_replace(['<p>','</p>'],'',$content);
        return preg_replace('/\s+?(\S+)?$/','',substr($content,0,$lenght)).$prefix;
     }
+
+    public static function orderingInput($controllerName,$value,$id)
+    {
+        $link = route($controllerName . '/ordering', ['ordering' => 'value_new', 'id' => $id]);
+        return    sprintf(' <input type="number" class="ajax-ordering"  style="width:50px;" name="ordering" value="%s" data-url="%s">',$value ?? '', $link);
+       
+    }
+
 }

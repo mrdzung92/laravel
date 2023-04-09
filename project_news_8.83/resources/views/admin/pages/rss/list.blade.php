@@ -25,7 +25,7 @@
                     $class = $index % 2 == 0 ? 'even' : 'odd';
                     $name = Highlight::show( $item->name,$params['search'],'name');
                     $link = Highlight::show($item->link,$params['search'],'link');
-                    $ordering = Form::number('ordering', $item->ordering ?? '',['style'=>'width:50px;','class'=>'ajax-ordering','data-url'=>route($controllerName . '/ordering', ['ordering' => 'value_new', 'id' => $id])]);
+                    $ordering = Template::orderingInput($controllerName,$item->ordering,$id);
                     $status = Template::showItemStatus($item->status, $id, $controllerName);
                     $source = Template::showItemSelect($item->source, $id, $controllerName,'source');
                     $createdHistory = Template::showItemHistory($item->created, $item->created_by);

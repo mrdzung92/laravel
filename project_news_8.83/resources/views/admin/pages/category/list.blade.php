@@ -27,7 +27,7 @@
                     $name = Highlight::show( $item->name,$params['search'],'name');
                     $status = Template::showItemStatus($item->status, $id, $controllerName);
                     $isHome =  Template::showItemIsHome($item->is_home, $id, $controllerName);
-                    $ordering = Form::number('ordering', $item->ordering ?? '',['style'=>'width:50px;','class'=>'ajax-ordering','data-url'=>route($controllerName . '/ordering', ['ordering' => 'value_new', 'id' => $id])]);
+                    $ordering = Template::orderingInput($controllerName,$item->ordering,$id);
                     $display = Template::showItemSelect($item->display, $id, $controllerName,'display');
                     $createdHistory = Template::showItemHistory($item->created, $item->created_by);
                     $modifiedHistory = Template::showItemHistory($item->modified, $item->modified_by);
