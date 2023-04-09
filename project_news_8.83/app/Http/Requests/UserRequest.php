@@ -36,7 +36,7 @@ class UserRequest extends FormRequest
         $condFullName = '';
         switch ($task) {
             case 'add':
-                $condAvartar = 'bail|required|mimes:jpeg,jpg,bmp,png,gif|max:1000';
+                $condAvartar = 'bail|required|mimes:jpeg,jpg,bmp,png,gif|max:10000';
                 $condUserName = "required|between:5,100|unique:$this->table,username";
                 $condEmail = "bail|required|between:5,100|unique:$this->table,email";
                 $condFullName = 'bail|required|min:5';
@@ -68,7 +68,7 @@ class UserRequest extends FormRequest
             'status' => $condStatus,
             'level' => $condLevel,
             'password' => $condPwd,
-            'avartar' => $condAvartar,
+            'avatar' => $condAvartar,
         ];
     }
 

@@ -2,65 +2,26 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\SliderRequest as MainRequest;
 use App\Models\SliderModel as MainModel;
-use Illuminate\Http\Request;
-
 
 class SliderController extends AdminMainController
 {
-   
 
     public function __construct()
     {
-        
-       $this->pathViewController = 'admin.pages.slider.';
-       $this->controllerName = 'slider';
-       $this->model = new MainModel();
-       parent::__construct($this->controllerName, $this->model);
-       $this->params = [
-        'pagination' => [
-            'totalItemPerPage' =>10,
-        ],
-    ];
-       
-    }
 
-    public function index(Request $request)
-    {
-        $this->params['filter']['status'] = $request->input('filter_status', 'all');
-        $this->params['search']['field'] = $request->input('search_field', '');
-        $this->params['search']['value'] = $request->input('search_value', '');
-        $items = $this->model->listItems($this->params, ['task' => 'admin-list-item']);
-        $itemsStatusCount = $this->model->countItems($this->params, ['task' => 'admin-count-item-group-by-status']);
-        return view($this->pathViewController . 'index', [
-            'params' => $this->params,
-            'items' => $items,
-            'itemsStatusCount' => $itemsStatusCount,
-        ]);
-    }
-    public function form(Request $request)
-    {
-        $item = null;
-        if ($request->id !== null) {
-            $params['id'] = $request->id;
-            $item = $this->model->getItem($params, ['task' => 'get-item']);
-        }
-        return view($this->pathViewController . 'form', [
-            'item' => $item,
-        ]);
-    }
-    public function delete(Request $request)
-    {
-        $params['id'] = $request->id;
-        $this->model->deleteItem($params, ['task' => 'delete-item']);
-        return redirect()->route($this->controllerName)->with('my_notify', 'Xoá phần tử thành công');
-    }
+        $this->pathViewController = 'admin.pages.slider.';
+        $this->controllerName = 'slider';
+        $this->model = new MainModel();
 
-    public function status(Request $request)
-    {
-      return  parent::status($request);
+        $this->params = [
+            'pagination' => [
+                'totalItemPerPage' => 10,
+            ],
+        ];
+        parent::__construct();
+
     }
 
     public function save(MainRequest $request)

@@ -2,22 +2,23 @@
 
 namespace App\Http\Controllers\News;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+
 use App\Http\Requests\AuthLoginRequest as MainRequest;
 use App\Models\UserModel ;
 
 
 
-class AuthController extends Controller
+class AuthController extends NewsMainController
 {
-    private $pathViewController = 'news.pages.auth.';
-    private $controllerName = 'auth';
-    private $params = [];
-    private $model;
+   
 
     public function __construct()
     {
-        view()->share('controllerName', $this->controllerName);
+       $this->pathViewController = 'news.pages.auth.';
+       $this->controllerName = 'auth';
+       $this->params = [];
+       $this->model;
+        parent::__construct();
 
     }
 
