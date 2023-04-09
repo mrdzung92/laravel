@@ -324,6 +324,11 @@ Route::group(['namespace'=>'News','prefix'=>$prefixNews],function () {
              'as' => $controllerName.'/noPermission',
              'uses' => $controller . 'noPermission',
          ]);
+
+         Route::get('/page-not-found', [
+            'as' => $controllerName.'/pageError',
+            'uses' => $controller . 'pageError',
+        ]);
  
      });
 
@@ -349,5 +354,9 @@ Route::group(['namespace'=>'News','prefix'=>$prefixNews],function () {
 
     });
 
+   
+});
 
+Route::fallback(function () {
+    return redirect()->route('notify/pageError');
 });
