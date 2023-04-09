@@ -95,9 +95,12 @@ Route::group(['namespace'=>'Admin','prefix'=>$prefixAdmin ,'middleware'=>['permi
         Route::post('/change-level', [
             'as' => $controllerName . '/change-level',
             'uses' => $controller . 'formChangeLevel',
-        ])->where('id', '[0-9]+');
+        ])->where('id', '[0-9]+');  
 
-       
+        Route::get('/change-self-pwd', [
+            'as' => $controllerName . '/selfPwd',
+            'uses' => $controller . 'changeSelfPwd',
+        ]);  
   
       });
 

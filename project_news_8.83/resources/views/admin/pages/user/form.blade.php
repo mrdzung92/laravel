@@ -4,7 +4,7 @@
     @include('admin.templates.page_header', ['pageIndex' => false])
     @include('admin.templates.error')
     @php
-        
+ 
     @endphp
     @if (isset($item['id']))
     <div class="row">

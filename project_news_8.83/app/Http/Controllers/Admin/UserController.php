@@ -55,6 +55,13 @@ class UserController extends AdminMainController
         return redirect()->route($this->controllerName)->with('my_notify', 'Cập nhật trạng thái thành công');
     }
 
+
+    public function changeSelfPwd(MainRequest $request)
+    {
+        return view($this->pathViewController . 'changePass.index');
+        
+    }
+
     public function save(MainRequest $request)
     {
         if ($request->method() == 'POST') {
