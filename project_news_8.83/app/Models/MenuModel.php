@@ -6,16 +6,16 @@ use App\Models\AdminModel;
 use Config;
 use DB;
 
-class UserModel extends AdminModel
+class MenuModel extends AdminModel
 {
 
     public function __construct()
     {
-        $this->table = 'user';
-        $this->controllerName = 'user';
-        $this->folderUpload = 'user';
+        $this->table = 'menu';
+        $this->controllerName = 'menu';
+        $this->folderUpload = 'menu';
         $this->fieldSearchAccepted = [];
-        $this->arrayCrudNotAccepted = ['_token', 'thumb_current','password_confirmation','edit-info','add'];
+        $this->arrayCrudNotAccepted = ['_token', 'thumb_current'];
 
     }
 
@@ -28,7 +28,7 @@ class UserModel extends AdminModel
 
         $result = null;
         if ($option['task'] === 'admin-list-item') {
-            $query = $this->select('id', 'username', 'email', 'fullname', 'avatar','level', 'created', 'created_by', 'modified', 'modified_by', 'status');
+            $query = $this->select('id', 'name', 'ordering', 'link','type_menu', 'type_open', 'created', 'created_by', 'modified', 'modified_by', 'status');
 
             if ($params['filter']['status'] !== 'all') {
                 $query->where('status', '=', $params['filter']['status']);
@@ -99,37 +99,30 @@ class UserModel extends AdminModel
                 ->update(['status' => $status]);
         }
 
-        if ($option['task'] === 'changeLevel') {
+        if ($option['task'] === 'change-type-open') {  
             $this::where('id', $params['id'])
-                ->update(['level' =>$params['currentValue']]);
+                ->update(['type_open' => $params['currentValue']]);
         }
 
-        if ($option['task'] === 'change-password') {
-            $pwd = md5($params['password']);
+        if ($option['task'] === 'change-type-menu') {
             $this::where('id', $params['id'])
-                ->update(['password' =>$pwd]);
+                ->update(['type_menu' => $params['currentValue']]);
         }
 
-        if ($option['task'] === 'change-self-password') {
-            $userInfo = session('userInfo');
+        if ($option['task'] === 'change-ordering') {
+            $this::where('id', $params['id'])
+                ->update(['ordering' => $params['currentValue']]);
 
-            $pwd = md5($params['password']);
-            $this::where('id', $userInfo['id'])->where('username', $userInfo['username'])
-                ->update(['password' =>$pwd]);
         }
 
         if ($option['task'] === 'add-item') {
             $params['created'] = date('Y-m-d h:m:s', time());
             $params['created_by'] = 'admin';
-            $params['avatar'] = $this->uploadThumb($params['avatar']);
-            $params['password'] = md5( $params['password']);
+        
             self::insert($this->repairParams($params));
         }
         if ($option['task'] === 'edit-item') {
-            if (!empty($params['avatar'])) {
-                $this->deleteThumb($params['thumb_current']);
-                $params['avatar'] = $this->uploadThumb($params['avatar']);
-            }
+          
             $params['modified'] = date('Y-m-d h:m:s', time());
             $params['modified_by'] = 'admin';
             self::where('id', $params['id'])->update($this->repairParams($params));
@@ -140,9 +133,6 @@ class UserModel extends AdminModel
     public function deleteItem($params = null, $option = null)
     {
         if ($option['task'] === 'delete-item') {
-            $item = self::getItem($params, ['task' => 'get-thumb']);
-            $this->deleteThumb($item['avatar']);
-
             self::where('id', $params['id'])
                 ->delete();
         }
@@ -152,21 +142,12 @@ class UserModel extends AdminModel
     {
         $result = null;
         if ($option['task'] === 'get-item') {
-            $result = $this->select('id', 'username', 'email', 'fullname', 'status','avatar','level')
+            $result = $this->select('id', 'name', 'ordering', 'link','type_menu', 'type_open',  'status')
                 ->where('id', $params['id'])->first();
         }
         if ($option['task'] === 'get-thumb') {
-            $result = $this->select('avatar', 'id')
+            $result = $this->select('thumb', 'id')
                 ->where('id', $params['id'])->first();
-        }
-
-        if ($option['task'] === 'auth-login') {
-            $result = self::select('avatar', 'id', 'username','fullname','email','level','avatar')
-                ->where('status','=', 'active')
-                ->where('email','=', $params['email'])
-                ->where('password','=', md5($params['password']))->first();
-                if( $result)  $result = $result->toArray();
-
         }
         return $result;
     }

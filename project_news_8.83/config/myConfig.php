@@ -75,6 +75,17 @@ return [
             'ThannNien' => ['name' => 'Thanh Niên'],
 
         ],
+        'type_menu' => [
+            'link' => ['name' => 'Link'],
+            'category_product' => ['name' => 'Danh mục sản phẩm'],
+            'category_article' => ['name' => 'Danh mục bài viết'],
+
+        ],
+        'type_open'=> [       
+            'current' => ['name' => 'Mở trang hiện tại'],
+            'new_tab' => ['name' => 'Mở trang mới'],
+
+        ],
 
         'search' => [
             'all' => ['name' => 'Search by All'],
@@ -104,6 +115,7 @@ return [
             'article' => ['all', 'name', 'content'],
             'user' => ['all', 'username', 'email'],
             'rss' => ['all', 'id', 'name', 'source', 'link'],
+            'menu' => ['all', 'id', 'name',],
         ],
         'button' => [
             'default' => ['edit', 'delete'],
@@ -112,6 +124,7 @@ return [
             'article' => ['edit', 'delete'],
             'user' => ['edit'],
             'rss' => ['edit', 'delete'],
+            'menu' => ['edit', 'delete'],
         ],
     ],
 ];

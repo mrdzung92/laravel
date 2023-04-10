@@ -27,6 +27,8 @@
                     <li><a href="{{ route('article') }}"><i class="fa fa-newspaper-o"></i> Article</a></li>
                     <li><a href="{{ route('slider') }}"><i class="fa fa-sliders"></i> Silders</a></li>
                     <li><a href="{{ route('rss') }}"><i class="fa  fa-rss"></i> Rss</a></li>
+                    <li><a href="{{ route('menu') }}"><i class="fa-solid fa-bars"></i> Menu</a></li>
+                    <li><a href="{{ route('user/selfPwd') }}"><i class="fa-solid fa-lock"></i> Change Pass</a></li>
                 </ul>
             </div>
         </div>

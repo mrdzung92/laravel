@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Http\Requests\Input;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UserRequest extends FormRequest
@@ -23,8 +24,19 @@ class UserRequest extends FormRequest
      * @return array
      */
 
+    protected function prepareForValidation()
+    {
+
+        if ($this->request->has('current_password')) {
+            $this->merge([
+                'current_password' => md5($this->request->get('current_password')),
+            ]);
+        }
+
+    }
     public function rules()
     {
+
         $id = $this->id;
         $task = array_search('form-task', request()->input());
         $condAvartar = '';
@@ -34,6 +46,8 @@ class UserRequest extends FormRequest
         $condLevel = '';
         $condStatus = '';
         $condFullName = '';
+
+        $condOldPass = '';
         switch ($task) {
             case 'add':
                 $condAvartar = 'bail|required|mimes:jpeg,jpg,bmp,png,gif|max:10000';
@@ -60,15 +74,27 @@ class UserRequest extends FormRequest
             case 'changeLevel':
                 $condLevel = 'bail|in:admin,member';
                 break;
+
+            case 'selfPass':
+                $userInfo = session('userInfo');
+                $id = $userInfo['id'];
+                $condPwd = 'bail|required|min:3|confirmed';
+                $condOldPass = "bail|required|exists:$this->table,password,id, $id";
+                break;
+
         }
+        
+
         return [
             'username' => $condUserName,
             'fullname' => $condFullName,
             'email' => $condEmail,
             'status' => $condStatus,
             'level' => $condLevel,
+            'current_password' => $condOldPass,
             'password' => $condPwd,
             'avatar' => $condAvartar,
+
         ];
     }
 
@@ -87,16 +113,9 @@ class UserRequest extends FormRequest
             'level.in' => '<strong>- Level :</strong> phải là giá trị khác giá trị mặc định',
             'avartar.required' => '<strong>- Avartar :</strong> không được rỗng',
             'avartar.mimes' => '<strong>- Avartar :</strong> Phải là ảnh',
+            'current_password.exists' => '<strong>- Old password :</strong> Không đúng',
             // 'thumb.image' => '<strong>- Thumb :</strong> Phải là ảnh',
         ];
-    }
-
-    public function response(array $errors)
-    {
-        echo '<pre>';
-        print_r($errors);
-        echo '</pre>';
-        die();
     }
 
 }

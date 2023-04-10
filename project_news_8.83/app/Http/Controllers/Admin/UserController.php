@@ -58,6 +58,7 @@ class UserController extends AdminMainController
 
     public function changeSelfPwd(MainRequest $request)
     {
+
         return view($this->pathViewController . 'changePass.index');
         
     }
@@ -68,10 +69,15 @@ class UserController extends AdminMainController
             $params = $request->all();
             $task = 'add-item';
             $notify = 'Thêm phần tử thành công';
-            if ($params['id'] !== null) {
+            if (isset($params['id']) && $params['id'] !== null) {
                 $task = 'edit-item';
                 $notify = 'Cập nhật phần tử thành công';
             }
+            if(isset($params['selfPass'])){
+                $task = 'change-self-password';
+                $notify = 'Thay đổi mật khẩu thành công';
+            }
+           
             $this->model->saveItem($params, ['task' => $task]);
 
             return redirect()->route($this->controllerName)->with('my_notify', $notify);

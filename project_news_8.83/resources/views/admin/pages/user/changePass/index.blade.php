@@ -6,11 +6,10 @@
     @php
         use App\Helpers\FormTemplate as FormTemplate;
         $formAttributes = Config::get('myConfig.template.form');
-        
         $elements = [
             [
-                'label' => Form::label('old_pass', 'Old PassWord', $formAttributes['label']),
-                'element' => Form::password('old_password', $formAttributes['input']),
+                'label' => Form::label('current_password', 'Old PassWord', $formAttributes['label']),
+                'element' => Form::password('current_password', $formAttributes['input']),
             ],
             [
                 'label' => Form::label('password', 'PassWord', $formAttributes['label']),
@@ -21,7 +20,7 @@
                 'element' => Form::password('password_confirmation', $formAttributes['input']),
             ],
             [
-                'element' => Form::hidden('changePwd', 'form-task') . Form::hidden('id', $item['id'] ?? '') . Form::submit('Save', ['class' => 'btn btn-success']),
+                'element' => Form::hidden('selfPass', 'form-task')  . Form::submit('Save', ['class' => 'btn btn-success']),
                 'type' => 'btn-submit',
             ],
         ];
@@ -36,7 +35,7 @@
                 <div class="x_content">
                     <div class="row">
                         {!! Form::open([
-                            'url' => route($controllerName . '/change-pwd'),
+                            'url' => route($controllerName . '/save'),
                             ' accept-charset' => 'UTF-8',
                             'method' => 'POST',
                             'enctype' => 'multipart/form-data',

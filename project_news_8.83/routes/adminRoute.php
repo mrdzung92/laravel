@@ -237,4 +237,53 @@ Route::group(['namespace'=>'Admin','prefix'=>$prefixAdmin ,'middleware'=>['permi
   
       });
 
+       // ===============MENU===============
+    $prefix = 'menu';
+    $controllerName = 'menu';
+    Route::prefix($prefix)->group(function () use ($controllerName, $prefix) {
+
+        $controller = ucfirst($controllerName) . 'Controller@';
+
+        Route::get('/', [
+            'as' => $controllerName,
+            'uses' => $controller . 'index',
+        ]);
+
+        Route::get('/form/{id?}', [
+            'as' => $controllerName . '/form',
+            'uses' => $controller . 'form',
+        ])->where('id', '[0-9]+');
+
+        Route::post('save', [
+            'as' => $controllerName . '/save',
+            'uses' => $controller . 'save',
+        ]);
+
+        Route::get('/delete/{id}', [
+            'as' => $controllerName . '/delete',
+            'uses' => $controller . 'delete',
+        ])->where('id', '[0-9]+');
+
+        Route::get('/changeStatus-{status}/{id}', [
+            'as' => $controllerName . '/status',
+            'uses' => $controller . 'status',
+        ])->where('id', '[0-9]+');
+
+        Route::get('/changeOrdering-{ordering}/{id}', [
+            'as' => $controllerName . '/ordering',
+            'uses' => $controller . 'orderingAjax',
+        ])->where('id', '[0-9]+');
+
+        Route::get('/type-menu-{type_menu}/{id}', [
+            'as' => $controllerName . '/type_menu',
+            'uses' => $controller . 'typeMenu',
+        ])->where('id', '[0-9]+');
+
+        Route::get('/type-open-{type_open}/{id}', [
+            'as' => $controllerName . '/type_open',
+            'uses' => $controller . 'typeOpen',
+        ])->where('id', '[0-9]+');
+
+    });
+
 });
