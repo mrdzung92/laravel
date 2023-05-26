@@ -1,26 +1,47 @@
 @php
     use App\Models\CategoryModel as CategoryModel;
+    use App\Models\MenuModel as MenuModel;
     use App\Helpers\Url;
     $CategoryModel = new CategoryModel();
-  $itemCategory =  $CategoryModel->listItems(null,['task' =>'news-list-items']);
-  $htmlMenuWed ='';
-  $htmlMenuMobile ='';
-  $currentCategoryId = Route::input('category_id');
-  if(count($itemCategory)>0){
-    foreach ($itemCategory as $value) {
-        $link = Url::linkCategory($value['id'],$value['name']);    
-        $classActive = $value['id']==$currentCategoryId ?'class="active"':'';
-        $htmlMenuWed .= sprintf('<li %s><a href="%s">%s</a></li>', $classActive ,$link,$value['name']);
-        $htmlMenuMobile .=' <li class="menu_mm"><a href="#">'.$value['name'].'</a></li>';
+    $itemsCategory = $CategoryModel->listItems(null, ['task' => 'news-list-items']);
+    $menuModel = new MenuModel();
+    $itemsMenu = $menuModel->listItems(null, ['task' => 'news-list-items']);
+
+    $htmlMenuWed = '';
+    $htmlMenuMobile = '';
+    $currentCategoryId = Route::input('category_id');
+    if (count($itemsMenu) > 0) {
+        foreach ($itemsMenu as $menu){
+            $classActive = $menu['id'] == $currentCategoryId ? 'class="active"' : '';
+            switch($menu['type_menu']){
+                case 'category_product':
+                    $htmlMenuWed .= sprintf('<li %s><a href="%s">%s </a><ul>', $classActive, $menu['link'], $menu['name']);
+                    $htmlMenuMobile .= sprintf('<li class="menu_mm"><a href="%s">%s</a><ul>', $menu['link'], $menu['name']);
+                    $htmlMenuMobile .= '</ul></li>';
+                    $htmlMenuWed .= '</ul></li>';
+                    break;
+                case 'category_article':
+                    $htmlMenuWed .= sprintf('<li %s><a href="%s">%s &dtrif;</a><ul class="dropdown">', $classActive, $menu['link'], $menu['name']);
+                    $htmlMenuMobile .= sprintf('<li class="menu_mm"><a href="%s">%s</a><ul>', $menu['link'], $menu['name']);
+                    foreach ($itemsCategory as $category) {
+                        $link = Url::linkCategory($category['id'], $category['name']);
+                        $htmlMenuWed .= sprintf('<li %s><a href="%s">%s</a></li>', $classActive, $link, $category['name']);
+                    }
+                    $htmlMenuMobile .= '</ul></li>';
+                    $htmlMenuWed .= '</ul></li>';
+                    break;
+                default:
+                    $htmlMenuWed .= sprintf('<li><a href="%s">%s</a></li>', $menu['link'], $menu['name']);
+                    $htmlMenuMobile .= sprintf('<li class="menu_mm"><a href="%s">%s</a></li>', $menu['link'], $menu['name']);
+                    break;
+            }
+        }
+       if (session('userInfo')) {
+            $htmlMenuWed .= sprintf('<li %s><a href="%s">%s</a></li>', $classActive, route('auth/logout'), 'Đăng xuất');
+        } else {
+            $htmlMenuWed .= sprintf('<li %s><a href="%s">%s</a></li>', $classActive, route('auth/login'), 'Đăng nhập');
+        }
     }
-    $htmlMenuWed .=sprintf('<li %s><a href="%s">TT Tổng hợp</a></li>', $classActive ,route('rss/tin-tuc-tong-hop'));
-    if(session('userInfo')){
-        $htmlMenuWed .=sprintf('<li %s><a href="%s">%s</a></li>', $classActive ,route('auth/logout'),'Đăng xuất');
-    }else {
-        $htmlMenuWed .=sprintf('<li %s><a href="%s">%s</a></li>', $classActive ,route('auth/login'),'Đăng nhập');
-    }
-   
-  }
 @endphp
 
 
@@ -32,14 +53,14 @@
                 <div class="col">
                     <div class="header_content d-flex flex-row align-items-center justfy-content-start">
                         <div class="logo_container">
-                            <a href="{{route('home')}}">
+                            <a href="{{ route('home') }}">
                                 <div class="logo"><span>ZEND</span>VN</div>
                             </a>
                         </div>
                         <div class="header_extra ml-auto d-flex flex-row align-items-center justify-content-start">
                             <a href="#">
                                 <div class="background_image"
-                                    style="background-image:url({{asset('news/images/zendvn-online.png')}});background-size: contain">
+                                    style="background-image:url({{ asset('news/images/zendvn-online.png') }});background-size: contain">
                                 </div>
                             </a>
                         </div>
@@ -63,7 +84,7 @@
                         <!-- Navigation -->
                         <nav class="main_nav">
                             <ul class="main_nav_list d-flex flex-row align-items-center justify-content-start">
-                              {!!$htmlMenuWed!!}
+                                {!! $htmlMenuWed !!}
                             </ul>
                         </nav>
                         <!-- Hamburger -->
@@ -86,7 +107,7 @@
     </div>
     <nav class="menu_nav">
         <ul class="menu_mm">
-            {!!$htmlMenuMobile!!}
+            {!! $htmlMenuMobile !!}
         </ul>
     </nav>
     <div class="menu_subscribe"><a href="#">Subscribe</a></div>

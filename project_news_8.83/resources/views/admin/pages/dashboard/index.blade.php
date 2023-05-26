@@ -1,6 +1,6 @@
 @extends('admin.main')
 @section('content')
-    @php  
+    @php
         $arrayBoxFormat = [
             'article' => ['name' => 'Article', 'class' => 'bg-info', 'icon' => 'fa-newspaper', 'route' => route('article')],
             'user' => ['name' => 'User', 'class' => 'bg-success', 'icon' => 'fa-user-plus', 'route' => route('user')],

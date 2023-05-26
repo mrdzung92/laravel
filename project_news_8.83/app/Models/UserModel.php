@@ -114,7 +114,7 @@ class UserModel extends AdminModel
             $userInfo = session('userInfo');
 
             $pwd = md5($params['password']);
-            $this::where('id', $userInfo['id'])->where('username', $userInfo['username'])
+            $this::where('id', $userInfo['id'])
                 ->update(['password' =>$pwd]);
         }
 

@@ -178,3 +178,40 @@ ul.main_nav_list li.active a{
 {
     color: #61e49b;
 }
+
+
+ul.main_nav_list {
+    position: relative;
+}
+
+ul.main_nav_list li ul {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    padding-left: 0;
+    display: none;
+    background: white;
+}
+ul.main_nav_list li:hover > ul,
+ul li ul:hover {
+    visibility: visible;
+    opacity: 1;
+    display: block;
+    min-width: 150px;
+    text-align: left;
+    padding-top: 20px;
+    box-shadow: 0px 3px 5px -1px #ccc;
+}
+
+ul.main_nav_list li ul li {
+    clear: both;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 20px;
+    border-style: none;
+    padding-left: 10px;
+}
+
+ul.main_nav_list li ul li:last-child {
+    margin-bottom: unset;
+}

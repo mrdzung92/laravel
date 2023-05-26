@@ -32,12 +32,12 @@ class NotifyController extends NewsMainController
 
     public function pageError(Request $request)
     {
-        $ArticleModel = new ArticleModel();
+        // $ArticleModel = new ArticleModel();
 
-        $itemLatest = $ArticleModel->listItems(null, ['task' => 'news-list-items-latest']);
+        // $itemLatest = $ArticleModel->listItems(null, ['task' => 'news-list-items-latest']);
         return view($this->pathViewController . 'page-not-found', [
             'params' => $this->params,
-            'itemLatest' => $itemLatest,
+            // 'itemLatest' => $itemLatest,
 
         ]);
     }

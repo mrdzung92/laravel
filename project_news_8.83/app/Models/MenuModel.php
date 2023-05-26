@@ -48,16 +48,15 @@ class MenuModel extends AdminModel
                 }
             }
 
-            $result = $query->orderBy('id', 'desc')
+            $result = $query->orderBy('ordering', 'asc')
                 ->paginate($params['pagination']['totalItemPerPage']);
         }
 
         if ($option['task'] === 'news-list-items') {
 
-            $query = $this->select('id', 'name', 'description', 'thumb','link')
+            $query = $this->select('id', 'name', 'link', 'type_menu', 'type_open')
                 ->where('status', '=', 'active')
-                ->limit(5);
-
+                ->orderBy('ordering', 'asc');
             $result = $query->get()->toArray();
 
         }
@@ -99,7 +98,7 @@ class MenuModel extends AdminModel
                 ->update(['status' => $status]);
         }
 
-        if ($option['task'] === 'change-type-open') {  
+        if ($option['task'] === 'change-type-open') {
             $this::where('id', $params['id'])
                 ->update(['type_open' => $params['currentValue']]);
         }
@@ -118,11 +117,11 @@ class MenuModel extends AdminModel
         if ($option['task'] === 'add-item') {
             $params['created'] = date('Y-m-d h:m:s', time());
             $params['created_by'] = 'admin';
-        
+
             self::insert($this->repairParams($params));
         }
         if ($option['task'] === 'edit-item') {
-          
+
             $params['modified'] = date('Y-m-d h:m:s', time());
             $params['modified_by'] = 'admin';
             self::where('id', $params['id'])->update($this->repairParams($params));
